@@ -2,14 +2,17 @@ import React from 'react';
 
 const ClassList = ({ data }) => {
   const classElements = data.map(cClass => (
-    <div key={cClass._id} id={cClass._id}>
-      <h1>{cClass.name}</h1>
-      <a href={cClass.url} target="_blank" rel="noopener noreferrer">
-        {cClass.url}
-      </a>
-    </div>
+    <option key={cClass._id} id={cClass._id}>
+      {cClass.name}
+    </option>
   ));
-  return <div>{classElements}</div>;
+  return (
+    <div>
+      <select name="classes" id="classes">
+        {classElements}
+      </select>
+    </div>
+  );
 };
 
 export default ClassList;
