@@ -1,4 +1,4 @@
-import React, { createContext, Component, createRef } from 'react';
+import React, { createContext, Component } from 'react';
 
 const { Provider, Consumer } = createContext();
 
