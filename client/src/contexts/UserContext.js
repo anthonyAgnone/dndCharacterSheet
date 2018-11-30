@@ -43,7 +43,7 @@ class UserContext extends Component {
         });
         return response.data.user.userName;
       })
-      .then(userName => this.props.history.push(`/${userName}/dashboard`));
+      .then(userName => this.props.history.push(`/dashboard`));
   };
 
   login = credentials => {
@@ -59,15 +59,13 @@ class UserContext extends Component {
         });
         return response.data.user.userName;
       })
-      .then(userName => this.props.history.push(`/${userName}/dashboard`));
+      .then(userName => this.props.history.push(`/dashboard`));
   };
 
   logout() {
     localStorage.removeItem('user');
     localStorage.removeItem('token');
-    this.setState({ user: {}, token: '' }, () =>
-      this.props.history.push('/huh')
-    );
+    this.setState({ user: {}, token: '' }, () => this.props.history.push('/'));
   }
 
   sendCredentials = credentials =>

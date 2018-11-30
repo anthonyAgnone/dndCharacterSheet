@@ -16,7 +16,6 @@ class Register extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleLogout = this.handleLogout.bind(this);
   }
 
   handleChange({ target: { name, value } }) {
@@ -31,13 +30,7 @@ class Register extends Component {
     this.props.register(this.state);
   }
 
-  handleLogout(e) {
-    e.preventDefault();
-    this.props.logout();
-  }
-
   render() {
-    const myButton = props => <button {...props} />;
     return (
       <div className="form" onSubmit={this.handleSubmit}>
         <h1>Register</h1>
@@ -84,18 +77,10 @@ class Register extends Component {
             type="password"
             margin="normal"
           />
-          <Button component={myButton} variant="contained" color="primary">
+          <Button type="button" variant="contained" color="primary">
             Send
           </Button>
         </form>
-        <Button
-          type="button"
-          onClick={this.handleLogout}
-          variant="contained"
-          color="primary"
-        >
-          LogOut
-        </Button>
       </div>
     );
   }

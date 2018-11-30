@@ -1,15 +1,24 @@
 import React from 'react';
-import Test from './components/testData/Test';
-import Register from './components/Register';
-import Login from './components/LogIn';
+import LandingPage from './components/LandingPage';
+import { withUserContext } from './contexts/UserContext';
+import { Route, Switch, Redirect } from 'react-router-dom';
+import Menu from './components/menu/Menu';
 
-export default function App() {
+const App = ({ user, token }) => {
   return (
     <div>
-      <h1>DnD 5e App</h1>
-      <Register />
-      <Login />
-      <Test />
+      <Menu />
+      {token ? (
+        <Switch>
+          <Redirect to={`/dashboard`} />
+        </Switch>
+      ) : (
+        <Switch>
+          <Route exact path="/" component={LandingPage} />
+        </Switch>
+      )}
     </div>
   );
-}
+};
+
+export default withUserContext(App);
