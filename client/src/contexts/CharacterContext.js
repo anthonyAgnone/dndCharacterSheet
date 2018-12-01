@@ -70,20 +70,29 @@ export default class CharacterContext extends Component {
       treasure: []
     }
     this.changeStat = this.changeStat.bind(this)
+    this.getStats = this.getStats.bind(this)
   }
 
   changeStat(name, statChange) {
-    console.log(name, statChange)
     this.setState(prevState => ({
       [name]: (prevState[name] += statChange)
     }))
   }
 
+  getStats() {
+    const statKeysArr = Object.keys(this.state)
+    const statValArr = []
+    Object.values(this.state).map(stat => statValArr.push(stat + '\n'))
+    return { statKeysArr, statValArr }
+  }
+
   render() {
     const props = {
       changeStat: this.changeStat,
+      getStats: this.getStats,
       ...this.state
     }
+
     return <Provider value={props}>{this.props.children}</Provider>
   }
 }

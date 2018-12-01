@@ -3,6 +3,7 @@ import LandingPage from './components/LandingPage'
 import { withUserContext } from './contexts/UserContext'
 import Profile from './components/profile/Profile'
 import { Route, Switch } from 'react-router-dom'
+import CreateCharacter from './components/characterCreation/CreateCharacter'
 import Menu from './components/menu/Menu'
 
 const App = ({ user, token }) => {
@@ -12,6 +13,7 @@ const App = ({ user, token }) => {
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/dashboard" component={Profile} />
+        <Route path="/create-character" component={CreateCharacter} />
       </Switch>
     </div>
   )
