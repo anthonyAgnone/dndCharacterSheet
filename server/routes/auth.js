@@ -4,8 +4,9 @@ const authRouter = express.Router();
 const jwt = require('jsonwebtoken');
 const expressJwt = require('express-jwt');
 
-authRouter.post('/signup', (req, res, next) => {
-  User.findOne({ username: req.body.username }, (err, existingUser) => {
+authRouter.post('/register', (req, res, next) => {
+  console.log(req.body);
+  User.findOne({ userName: req.body.userName }, (err, existingUser) => {
     if (err) {
       res.status(500);
       return next(err);
@@ -26,7 +27,8 @@ authRouter.post('/signup', (req, res, next) => {
 });
 
 authRouter.post('/login', (req, res, next) => {
-  User.findOne({ username: req.body.username.toLowerCase() }, (err, user) => {
+  console.log(req.body);
+  User.findOne({ userName: req.body.userName.toLowerCase() }, (err, user) => {
     if (err) {
       res.status(500);
       return next(err);

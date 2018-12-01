@@ -18,6 +18,8 @@ mongoose.connect(
   () => console.log('Connected to MongoDB')
 );
 
+app.use('/auth', require('./routes/auth'));
+
 app.use((err, req, res, next) => {
   console.log(err);
   if (err.name === 'UnauthorizedError') {
