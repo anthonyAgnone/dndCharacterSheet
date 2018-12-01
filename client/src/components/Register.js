@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
-import { withUserContext } from '../contexts/UserContext';
+import React, { Component } from 'react'
+import TextField from '@material-ui/core/TextField'
+import Button from '@material-ui/core/Button'
+import { withUserContext } from '../contexts/UserContext'
 
 class Register extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       firstName: '',
@@ -13,24 +13,25 @@ class Register extends Component {
       userName: '',
       password: '',
       email: ''
-    };
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    this.handleChange = this.handleChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   handleChange({ target: { name, value } }) {
     this.setState({
       [name]: value
-    });
+    })
   }
 
   handleSubmit(e) {
-    console.log('from register component');
-    e.preventDefault();
-    this.props.register(this.state);
+    console.log('from register component')
+    e.preventDefault()
+    this.props.register(this.state)
   }
 
   render() {
+    const NewButton = props => <button {...props} />
     return (
       <div className="form" onSubmit={this.handleSubmit}>
         <h1>Register</h1>
@@ -77,14 +78,14 @@ class Register extends Component {
             type="password"
             margin="normal"
           />
-          <Button type="button" variant="contained" color="primary">
+          <Button component={NewButton} variant="contained" color="primary">
             Send
           </Button>
         </form>
       </div>
-    );
+    )
   }
 }
 
 // export default withGameContext()()(Register);
-export default withUserContext(Register);
+export default withUserContext(Register)

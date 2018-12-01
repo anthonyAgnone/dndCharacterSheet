@@ -1,10 +1,10 @@
-import React, { createContext, Component } from 'react';
+import React, { createContext, Component } from 'react'
 
-const { Provider, Consumer } = createContext();
+const { Provider, Consumer } = createContext()
 
 export default class CharacterContext extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       name: '',
       race: '',
@@ -13,9 +13,9 @@ export default class CharacterContext extends Component {
       background: '',
       alignment: '',
       experience: 0,
-      str: 0,
+      str: 23,
       dex: 0,
-      const: 0,
+      const: 4,
       int: 0,
       wis: 0,
       charisma: 0,
@@ -68,17 +68,24 @@ export default class CharacterContext extends Component {
       allies: {},
       characterBackstory: '',
       treasure: []
-    };
+    }
+    this.changeStat = this.changeStat.bind(this)
+  }
+
+  changeStat(name, statChange) {
+    console.log(name, statChange)
+    this.setState(prevState => ({
+      [name]: (prevState[name] += statChange)
+    }))
   }
 
   render() {
     const props = {
+      changeStat: this.changeStat,
       ...this.state
-    };
-    return <Provider value={props}>{this.props.children}</Provider>;
+    }
+    return <Provider value={props}>{this.props.children}</Provider>
   }
 }
 
-export const withCharacter = C => props => (
-  <Consumer>{value => <C {...value} {...props} />}</Consumer>
-);
+export const withCharacter = C => props => <Consumer>{value => <C {...value} {...props} />}</Consumer>
