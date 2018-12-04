@@ -15,6 +15,9 @@ const characterSchema = new Schema({
     wis: Number,
     char: Number
   },
+  hairColor: String, 
+  weight: Number,
+  height: Number,
   user: {
     type: Schema.Types.ObjectId,
     ref: 'User'
