@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
-import TextField from '@material-ui/core/TextField';
 import styled from 'styled-components';
+
 import axios from 'axios';
 import PromiseHandler from '../api/PromiseHandler';
 import { withinView } from '../api/View';
+
 import RaceList from '../lists/RaceList';
 import GenderList from '../lists/GenderList';
 import ClassList from '../lists/ClassList';
+
+import StatRoll from '../statCalculations/StatRoll';
+
+import TextField from '@material-ui/core/TextField';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -66,7 +71,7 @@ export default class CreateCharacter extends Component {
     super(props);
 
     this.state = {
-      activeStep: 0,
+      activeStep: 4,
       name: '',
       cClass: '',
       race: '',
@@ -75,7 +80,6 @@ export default class CreateCharacter extends Component {
       dex: 0,
       const: 0
     };
-    this.getRaceData = this.getRaceData.bind(this);
   }
 
   handleChange = name => event => {
@@ -102,13 +106,13 @@ export default class CreateCharacter extends Component {
     });
   };
 
-  getRaceData() {
+  getRaceData = () => {
     const url = 'http://dnd5eapi.co/api/races';
 
     const apiQuery = `${cors}${url}`;
 
     return axios.get(apiQuery).then(response => response.data.results);
-  }
+  };
 
   getClassData() {
     const url = 'http://dnd5eapi.co/api/classes';
@@ -121,6 +125,12 @@ export default class CreateCharacter extends Component {
   handleSelected = (category, value) => {
     this.setState({
       [category]: value
+    });
+  };
+
+  handleRoll = (statName, statValue) => {
+    this.setState({
+      [statName]: statValue
     });
   };
 
@@ -216,6 +226,24 @@ export default class CreateCharacter extends Component {
                 render={withinView(ClassList)}
                 handleSelected={this.handleSelected}
               />
+              <div>
+                <Button disabled={activeStep === 0} onClick={this.handleBack}>
+                  Back
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>{steps[4]}</StepLabel>
+            <StepContent>
+              <StatRoll handleRoll={this.handleRoll} statName="str" />
               <div>
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
