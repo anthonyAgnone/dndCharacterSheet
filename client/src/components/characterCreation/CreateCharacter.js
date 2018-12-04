@@ -66,7 +66,7 @@ export default class CreateCharacter extends Component {
     super(props);
 
     this.state = {
-      activeStep: 3,
+      activeStep: 0,
       name: '',
       cClass: '',
       race: '',
