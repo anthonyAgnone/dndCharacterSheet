@@ -2,11 +2,11 @@ import React from 'react';
 import Loading from './Loading';
 import DataError from './ErrorHandling';
 
-const View = ({ loading, err, data, component: C }) => {
+const View = ({ loading, err, data, handleSelected, component: C }) => {
   return (
     <Loading loading={loading}>
       <DataError err={err}>
-        <C data={data} />
+        <C handleSelected={handleSelected} data={data} />
       </DataError>
     </Loading>
   );

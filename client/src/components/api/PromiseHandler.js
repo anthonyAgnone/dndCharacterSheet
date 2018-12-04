@@ -6,7 +6,8 @@ export default class PromiseHandler extends Component {
     this.state = {
       data: null,
       err: null,
-      loading: true
+      loading: true,
+      handleSelected: null
     };
   }
 
@@ -15,7 +16,8 @@ export default class PromiseHandler extends Component {
       this.setState({
         loading: false,
         err: null,
-        data
+        data,
+        handleSelected: this.props.handleSelected
       })
     );
   }
