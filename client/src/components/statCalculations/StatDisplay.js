@@ -1,6 +1,6 @@
-import React from 'react';
+import React from "react";
 
-const StatDisplay = ({ statName, statValue }) => {
+const StatDisplay = ({ statName, statValue, hr }) => {
   return (
     <div>
       {/* display the stats */}
