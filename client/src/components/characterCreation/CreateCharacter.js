@@ -1,36 +1,36 @@
-import React, { Component } from "react";
-import styled from "styled-components";
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import axios from "axios";
-import PromiseHandler from "../api/PromiseHandler";
-import { withinView } from "../api/View";
+import axios from 'axios';
+import PromiseHandler from '../api/PromiseHandler';
+import { withinView } from '../api/View';
 
-import RaceList from "../lists/RaceList";
-import GenderList from "../lists/GenderList";
-import ClassList from "../lists/ClassList";
+import RaceList from '../lists/RaceList';
+import GenderList from '../lists/GenderList';
+import ClassList from '../lists/ClassList';
 
-import StatRoll from "../statCalculations/StatRoll";
+import StatRoll from '../statCalculations/StatRoll';
 
-import TextField from "@material-ui/core/TextField";
-import Stepper from "@material-ui/core/Stepper";
-import Step from "@material-ui/core/Step";
-import StepLabel from "@material-ui/core/StepLabel";
-import StepContent from "@material-ui/core/StepContent";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import Paper from "@material-ui/core/Paper";
+import TextField from '@material-ui/core/TextField';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import StepContent from '@material-ui/core/StepContent';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
 
-const cors = "https://vschool-cors.herokuapp.com/?url=";
+const cors = 'https://vschool-cors.herokuapp.com/?url=';
 
 function getSteps() {
   return [
-    "Choose your name",
-    "Choose your race",
-    "Choose your gender",
-    "Choose your class",
-    "You will now roll for Strength",
-    "You will now roll for Dex",
-    "You will now roll for Const"
+    'Choose your name',
+    'Choose your race',
+    'Choose your gender',
+    'Choose your class',
+    'You will now roll for Strength',
+    'You will now roll for Dex',
+    'You will now roll for Const'
   ];
 }
 
@@ -73,18 +73,19 @@ export default class CreateCharacter extends Component {
     // to change initial section in character select for testing, change activeStep to appropriate step #, starts at 0
     this.state = {
       activeStep: 4,
-      name: "",
-      cClass: "",
-      race: "",
-      gener: "",
+      name: '',
+      cClass: '',
+      race: '',
+      gener: '',
       str: 0,
       dex: 0,
-      const: 0
+      const: 0,
+      statRolls: []
     };
 
     // bind this so the child can update the stat text? don't understand but ok.
     // Ted
-    this.handleRoll = this.handleRoll.bind(this);
+    // this.handleRoll = this.handleRoll.bind(this);
   }
 
   handleChange = name => event => {
@@ -112,7 +113,7 @@ export default class CreateCharacter extends Component {
   };
 
   getRaceData = () => {
-    const url = "http://dnd5eapi.co/api/races";
+    const url = 'http://dnd5eapi.co/api/races';
 
     const apiQuery = `${cors}${url}`;
 
@@ -120,7 +121,7 @@ export default class CreateCharacter extends Component {
   };
 
   getClassData() {
-    const url = "http://dnd5eapi.co/api/classes";
+    const url = 'http://dnd5eapi.co/api/classes';
 
     const apiQuery = `${cors}${url}`;
 
@@ -133,9 +134,9 @@ export default class CreateCharacter extends Component {
     });
   };
 
-  handleRoll = (statName, statValue) => {
+  handleRoll = array => {
     this.setState({
-      [statName]: statValue
+      statRolls: array
     });
   };
 
@@ -165,7 +166,7 @@ export default class CreateCharacter extends Component {
                 id="outlined-name"
                 label="Name"
                 value={this.state.name}
-                onChange={this.handleChange("name")}
+                onChange={this.handleChange('name')}
                 margin="normal"
                 variant="outlined"
               />
@@ -178,7 +179,7 @@ export default class CreateCharacter extends Component {
                   color="primary"
                   onClick={this.handleNext}
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </FormatDiv>
             </StepContent>
@@ -200,7 +201,7 @@ export default class CreateCharacter extends Component {
                   color="primary"
                   onClick={this.handleNext}
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </StepContent>
@@ -218,7 +219,7 @@ export default class CreateCharacter extends Component {
                   color="primary"
                   onClick={this.handleNext}
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </StepContent>
@@ -240,7 +241,7 @@ export default class CreateCharacter extends Component {
                   color="primary"
                   onClick={this.handleNext}
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </StepContent>
@@ -258,7 +259,7 @@ export default class CreateCharacter extends Component {
                   color="primary"
                   onClick={this.handleNext}
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </StepContent>
@@ -276,7 +277,7 @@ export default class CreateCharacter extends Component {
                   color="primary"
                   onClick={this.handleNext}
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </StepContent>
@@ -294,7 +295,7 @@ export default class CreateCharacter extends Component {
                   color="primary"
                   onClick={this.handleNext}
                 >
-                  {activeStep === steps.length - 1 ? "Finish" : "Next"}
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
             </StepContent>

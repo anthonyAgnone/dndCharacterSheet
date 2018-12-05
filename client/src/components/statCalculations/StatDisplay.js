@@ -1,14 +1,17 @@
-import React from "react";
+import React from 'react';
+import DieRolled from './DieRolled';
+import styled from 'styled-components';
 
-const StatDisplay = ({ statName, statValue, hr }) => {
-  return (
-    <div>
-      {/* display the stats */}
-      <h1>{statName}</h1>
-      {/* have all the stuffs in here make abstracted */}
-      <p>{statValue}</p>
-    </div>
-  );
+const Wrapper = styled.div`
+  width: 100%;
+  display: flex;
+`;
+
+const StatDisplay = ({ rolledStats, lowestIndex }) => {
+  const elements = rolledStats.map((val, i) => (
+    <DieRolled key={i} isLowest={i === lowestIndex} num={val} />
+  ));
+  return <Wrapper>{elements}</Wrapper>;
 };
 
 export default StatDisplay;
