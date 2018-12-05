@@ -70,6 +70,7 @@ export default class CreateCharacter extends Component {
   constructor(props) {
     super(props);
 
+    // to change initial section in character select for testing, change activeStep to appropriate step #, starts at 0
     this.state = {
       activeStep: 4,
       name: '',
@@ -78,8 +79,13 @@ export default class CreateCharacter extends Component {
       gener: '',
       str: 0,
       dex: 0,
-      const: 0
+      const: 0,
+      statRolls: []
     };
+
+    // bind this so the child can update the stat text? don't understand but ok.
+    // Ted
+    // this.handleRoll = this.handleRoll.bind(this);
   }
 
   handleChange = name => event => {
@@ -128,9 +134,9 @@ export default class CreateCharacter extends Component {
     });
   };
 
-  handleRoll = (statName, statValue) => {
+  handleRoll = array => {
     this.setState({
-      [statName]: statValue
+      statRolls: array
     });
   };
 
@@ -244,6 +250,42 @@ export default class CreateCharacter extends Component {
             <StepLabel>{steps[4]}</StepLabel>
             <StepContent>
               <StatRoll handleRoll={this.handleRoll} statName="str" />
+              <div>
+                <Button disabled={activeStep === 0} onClick={this.handleBack}>
+                  Back
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>{steps[5]}</StepLabel>
+            <StepContent>
+              <StatRoll handleRoll={this.handleRoll} statName="dex" />
+              <div>
+                <Button disabled={activeStep === 0} onClick={this.handleBack}>
+                  Back
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>{steps[6]}</StepLabel>
+            <StepContent>
+              <StatRoll handleRoll={this.handleRoll} statName="const" />
               <div>
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
