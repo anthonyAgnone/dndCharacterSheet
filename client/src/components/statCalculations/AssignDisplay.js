@@ -28,22 +28,7 @@ export default class AssignDisplay extends Component {
           type="button"
           disabled={this.state.buttonsDisabled[i]}
           onClick={() => {
-            this.props.assignStat(statRolls[i], this.state.statIndex);
-            // I want to update only an index of the array in state
-            // So I'm making a copy, changing it, and setting state variable to it
-            let tempStateCopy = this.state.buttonsDisabled;
-            tempStateCopy[i] = true;
-
-            if (this.state.statIndex < statRolls.length - 1) {
-              this.setState({
-                buttonsDisabled: tempStateCopy,
-                statIndex: (this.state.statIndex += 1)
-              });
-            } else {
-              this.setState({
-                buttonsDisabled: tempStateCopy
-              });
-            }
+            this.handleStatAssign(statRolls, i);
           }}
         >
           {statRolls[i]}
@@ -57,11 +42,7 @@ export default class AssignDisplay extends Component {
         key={statRolls.length + 1}
         type="button"
         onClick={() => {
-          this.setState({
-            buttonsDisabled: [false, false, false, false, false, false],
-            statIndex: 0
-          });
-          this.props.clearAssign();
+          this.handleClear();
         }}
       >
         Clear Stats
@@ -70,6 +51,32 @@ export default class AssignDisplay extends Component {
     return tmpButArr;
   };
 
+  handleStatAssign = (statRolls, i) => {
+    this.props.assignStat(statRolls[i], this.state.statIndex);
+    // I want to update only an index of the array in state
+    // So I'm making a copy, changing it, and setting state variable to it
+    let tempStateCopy = this.state.buttonsDisabled;
+    tempStateCopy[i] = true;
+
+    if (this.state.statIndex < statRolls.length - 1) {
+      this.setState({
+        buttonsDisabled: tempStateCopy,
+        statIndex: (this.state.statIndex += 1)
+      });
+    } else {
+      this.setState({
+        buttonsDisabled: tempStateCopy
+      });
+    }
+  };
+
+  handleClear = () => {
+    this.setState({
+      buttonsDisabled: [false, false, false, false, false, false],
+      statIndex: 0
+    });
+    this.props.clearAssign();
+  };
   // {statRolls.join(" ")}
   render() {
     return (
