@@ -1,6 +1,6 @@
-import React from "react";
-import DieRolled from "./DieRolled";
-import styled from "styled-components";
+import React from 'react';
+import DieRolled from './DieRolled';
+import styled from 'styled-components';
 
 const Wrapper = styled.div`
   width: 100%;
@@ -11,22 +11,23 @@ const Wrapper = styled.div`
 
 const StatDisplay = ({ rolledStats, lowestIndex, finalValues }) => {
   const elements = rolledStats.map((val, i) => (
-    <DieRolled key={i} isLowest={i === lowestIndex} num={val} />
+    <DieRolled key={i} delay={i} isLowest={i === lowestIndex} num={val} />
   ));
   return (
     <Wrapper>
       <div
         style={{
-          justifyContent: "center",
-          alignItems: "center",
-          height: "10vh"
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          height: '10vh'
         }}
       >
         {elements}
         <div>
           Stats Rolled
           <br />
-          {finalValues.join(" ")}
+          {finalValues.join(' ')}
         </div>
       </div>
     </Wrapper>
