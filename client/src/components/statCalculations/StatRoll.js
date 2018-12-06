@@ -1,5 +1,5 @@
-import React, { Component, createRef } from 'react';
-import StatDisplay from './StatDisplay';
+import React, { Component, createRef } from "react";
+import StatDisplay from "./StatDisplay";
 export default class StatRoll extends Component {
   constructor(props) {
     super(props);
@@ -64,6 +64,7 @@ export default class StatRoll extends Component {
         <StatDisplay
           rolledStats={this.state.rolledStats}
           lowestIndex={this.state.lowestIndex}
+          finalValues={this.state.finalValues}
         />
         <button
           ref={this.rollButton}
