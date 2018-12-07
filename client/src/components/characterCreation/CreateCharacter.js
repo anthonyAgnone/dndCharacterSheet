@@ -73,17 +73,17 @@ export default class CreateCharacter extends Component {
 
     // to change initial section in character select for testing, change activeStep to appropriate step #, starts at 0
     this.state = {
-      activeStep: 4,
-      name: "",
-      cClass: "",
-      race: "",
-      gener: "",
-      str: 0,
-      dex: 0,
-      con: 0,
-      int: 0,
-      wis: 0,
-      cha: 0,
+      activeStep: 0,
+      // name: "",
+      // cClass: "",
+      // race: "",
+      // gener: "",
+      // str: 0,
+      // dex: 0,
+      // con: 0,
+      // int: 0,
+      // wis: 0,
+      // cha: 0,
       statRolls: [0, 0, 0, 0, 0, 0]
     };
 
@@ -93,12 +93,17 @@ export default class CreateCharacter extends Component {
   }
 
   handleChange = name => event => {
-    this.setState({
-      [name]: event.target.value
-    });
+    // this.setState({
+    //   [name]: event.target.value
+    // });
+    // this.props.setValue(name, event.target.value);
+    this.props.setValue(name, event.target.value);
   };
 
   handleNext = () => {
+    if (this.state.activeStep === 6) {
+      this.props.statsDone();
+    }
     this.setState(state => ({
       activeStep: state.activeStep + 1
     }));
@@ -133,10 +138,10 @@ export default class CreateCharacter extends Component {
   }
 
   handleSelected = (category, value) => {
-    this.setState({
-      [category]: value
-    });
-    console.log(category);
+    // this.setState({
+    //   [category]: value
+    // });
+    this.props.setValue(category, value);
   };
 
   handleRoll = array => {
@@ -151,16 +156,16 @@ export default class CreateCharacter extends Component {
     return (
       <Form>
         <Selected>
-          <p>Name: {this.state.name}</p>
-          <p>Race: {this.state.race}</p>
-          <p>Gender: {this.state.gender}</p>
-          <p>Class: {this.state.cClass}</p>
-          <p>Strength: {this.state.str}</p>
-          <p>Dexterity: {this.state.dex}</p>
-          <p>Constitution: {this.state.con}</p>
-          <p>Intelligence: {this.state.int}</p>
-          <p>Wisdom: {this.state.wis}</p>
-          <p>Charisma: {this.state.cha}</p>
+          <p>Name: {this.props.charVal.name}</p>
+          <p>Race: {this.props.charVal.race}</p>
+          <p>Gender: {this.props.charVal.gender}</p>
+          <p>Class: {this.props.charVal.cClass}</p>
+          <p>Strength: {this.props.charVal.str}</p>
+          <p>Dexterity: {this.props.charVal.dex}</p>
+          <p>Constitution: {this.props.charVal.con}</p>
+          <p>Intelligence: {this.props.charVal.int}</p>
+          <p>Wisdom: {this.props.charVal.wis}</p>
+          <p>Charisma: {this.props.charVal.cha}</p>
         </Selected>
         <Stepper
           className="stepper"
@@ -173,7 +178,7 @@ export default class CreateCharacter extends Component {
               <TextField
                 id="outlined-name"
                 label="Name"
-                value={this.state.name}
+                value={this.props.name}
                 onChange={this.handleChange("name")}
                 margin="normal"
                 variant="outlined"
@@ -278,12 +283,12 @@ export default class CreateCharacter extends Component {
               <AssignStats
                 handleRoll={this.handleRoll}
                 statRolls={this.state.statRolls}
-                str={this.state.str}
-                dex={this.state.dex}
-                con={this.state.con}
-                int={this.state.int}
-                wis={this.state.wis}
-                cha={this.state.cha}
+                str={this.props.charVal.str}
+                dex={this.props.charVal.dex}
+                con={this.props.charVal.con}
+                int={this.props.charVal.int}
+                wis={this.props.charVal.wis}
+                cha={this.props.charVal.cha}
                 handleSelected={this.handleSelected}
               />
               <div>
