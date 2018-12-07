@@ -1,11 +1,11 @@
-import React from "react";
-import LandingPage from "./components/LandingPage";
-import { withUserContext } from "./contexts/UserContext";
-import Profile from "./components/profile/Profile";
-import { Route, Switch } from "react-router-dom";
-import CreateCharacter from "./components/characterCreation/CreateCharacter";
-import CharacterContext from "./contexts/CharacterContext";
-import Menu from "./components/menu/Menu";
+import React from 'react';
+import LandingPage from './components/LandingPage';
+import { withUserContext } from './contexts/UserContext';
+import Profile from './components/profile/Profile';
+import { Route, Switch } from 'react-router-dom';
+import CreateCharacter from './components/characterCreation/CreateCharacter';
+import CharacterContext from './contexts/CharacterContext';
+import Menu from './components/menu/Menu';
 
 const App = ({ user, token }) => {
   return (
@@ -14,7 +14,7 @@ const App = ({ user, token }) => {
       <Switch>
         <Route path="/" exact component={LandingPage} />
         <Route path="/dashboard" component={Profile} />
-        <Route path="/create-character" component={CharacterContext} />
+        <Route path="/create-character" component={CreateCharacter} />
       </Switch>
     </div>
   );
