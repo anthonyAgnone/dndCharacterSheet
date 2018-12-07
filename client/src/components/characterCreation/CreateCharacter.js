@@ -178,7 +178,7 @@ export default class CreateCharacter extends Component {
               <TextField
                 id="outlined-name"
                 label="Name"
-                value={this.props.name}
+                value={this.props.charVal.name}
                 onChange={this.handleChange("name")}
                 margin="normal"
                 variant="outlined"
