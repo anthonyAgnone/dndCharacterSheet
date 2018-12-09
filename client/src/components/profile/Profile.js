@@ -2,39 +2,43 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { withUserContext } from '../../contexts/UserContext'
 import { withCharacter } from '../../contexts/CharacterContext'
-import { Button } from '@material-ui/core'
-import { withRouter } from 'react-router-dom'
-// import Stats from './Stats'
+
+import Card from './Card'
 
 const Wrapper = styled.div`
-  margin-top: 20vh;
+  margin-top: 8vh;
+  width: 100vw;
+  height: 92vh;
+  display: grid;
+  grid-template-rows: 20px 5vh 1fr 5vh 20px;
+  grid-template-columns: 20px 1fr 20px;
+  grid-gap: 10px;
+  & h1 {
+    grid-row: 2;
+    grid-column: 2 / span 4;
+    align-self: center;
+  }
+  & .cardSection {
+    grid-column: 2;
+    grid-row: 3;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10%;
+  }
 `
 
 class Profile extends Component {
   render() {
-    // const iguana = this.props
-    // const stats = [iguana.str, iguana.dex, iguana.const]
-    // const keys = Object.keys(iguana)
+    const cards = ['', '', '', '']
 
-    // const elements = stats.map((stat, i) => (
-    //   <button onClick={() => iguana.changeStat(keys[i + 8], 1)}>Increase {keys[i + 8]}</button>
-    // ))
-    // const somethingElse = stats.map((value, i) => <h3> {value}</h3>)
-
+    const cardElements = cards.map((card, i) => <Card index={i} />)
     return (
       <Wrapper>
         <h1>{this.props.user.userName}</h1>
-
-        <Button
-          type="button"
-          variant="contained"
-          color="primary"
-          onClick={() => this.props.history.push('/create-character')}>
-          Create New Character
-        </Button>
+        <div className="cardSection">{cardElements}</div>
       </Wrapper>
     )
   }
 }
 
-export default withRouter(withUserContext(withCharacter(Profile)))
+export default withUserContext(withCharacter(Profile))
