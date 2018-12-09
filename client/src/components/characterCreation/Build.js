@@ -76,7 +76,7 @@ class Build extends Component {
 
   handleNext = () => {
     if (this.state.activeStep === 6) {
-      this.props.statsDone();
+      this.props.statsDone()
     }
     this.setState(state => ({
       activeStep: state.activeStep + 1
@@ -96,11 +96,7 @@ class Build extends Component {
   }
 
   getRaceData = () => {
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
     const url = 'http://dnd5eapi.co/api/races'
-=======
-    const url = 'http://dnd5eapi.co/api/races';
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
 
     const apiQuery = `${cors}${url}`
 
@@ -108,11 +104,7 @@ class Build extends Component {
   }
 
   getClassData() {
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
     const url = 'http://dnd5eapi.co/api/classes'
-=======
-    const url = 'http://dnd5eapi.co/api/classes';
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
 
     const apiQuery = `${cors}${url}`
 
@@ -120,16 +112,11 @@ class Build extends Component {
   }
 
   handleSelected = (category, value) => {
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
     this.setState({
       [category]: value
     })
     console.log(category)
   }
-=======
-    this.props.setValue(category, value);
-  };
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
 
   handleRoll = array => {
     this.setState({
@@ -142,27 +129,7 @@ class Build extends Component {
     const { activeStep } = this.state
     return (
       <Form>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
         <Stepper className="stepper" activeStep={activeStep} orientation="vertical">
-=======
-        <Selected>
-          <p>Name: {this.props.name}</p>
-          <p>Race: {this.props.race}</p>
-          <p>Gender: {this.props.gender}</p>
-          <p>Class: {this.props.cClass}</p>
-          <p>Strength: {this.props.str}</p>
-          <p>Dexterity: {this.props.dex}</p>
-          <p>Constitution: {this.props.con}</p>
-          <p>Intelligence: {this.props.int}</p>
-          <p>Wisdom: {this.props.wis}</p>
-          <p>Charisma: {this.props.cha}</p>
-        </Selected>
-        <Stepper
-          className="stepper"
-          activeStep={activeStep}
-          orientation="vertical"
-        >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
           <Step className="step">
             <StepLabel>{steps[0]}</StepLabel>
             <StepContent className="stepContent">
@@ -178,15 +145,7 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
-=======
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </FormatDiv>
@@ -204,15 +163,7 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
-=======
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -226,15 +177,7 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
-=======
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -252,15 +195,7 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
-=======
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -274,15 +209,7 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
-=======
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -293,11 +220,7 @@ class Build extends Component {
             <StepContent>
               <AssignStats
                 handleRoll={this.handleRoll}
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 statRolls={this.props.statRolls}
-=======
-                statRolls={this.state.statRolls}
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                 str={this.props.str}
                 dex={this.props.dex}
                 con={this.props.con}
@@ -310,15 +233,7 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
-=======
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -331,15 +246,7 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
                 <Button variant="contained" color="primary" onClick={this.handleNext}>
-=======
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={this.handleNext}
-                >
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -357,8 +264,4 @@ class Build extends Component {
   }
 }
 
-<<<<<<< HEAD:client/src/components/characterCreation/Build.js
 export default withCharacter(Build)
-=======
-export default withCharacter(CreateCharacter);
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a:client/src/components/characterCreation/CreateCharacter.js

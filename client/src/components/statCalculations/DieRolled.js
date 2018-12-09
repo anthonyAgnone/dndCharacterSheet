@@ -1,7 +1,7 @@
-import React, { Component, createRef } from 'react';
-import styled from 'styled-components';
+import React, { Component, createRef } from 'react'
+import styled from 'styled-components'
 
-import { TimelineMax, Power2 } from 'gsap';
+import { TimelineMax } from 'gsap'
 
 const Scene = styled.div`
   width: 80px;
@@ -135,13 +135,13 @@ const Scene = styled.div`
       transform: rotateX(-90deg) translateZ(38px);
     }
   }
-`;
+`
 export default class DieRolled extends Component {
   constructor(props) {
-    super(props);
-    this.die = createRef();
-    this.animation = null;
-    this.reset = null;
+    super(props)
+    this.die = createRef()
+    this.animation = null
+    this.reset = null
   }
 
   rollDie = () => {
@@ -176,9 +176,9 @@ export default class DieRolled extends Component {
         y: -180,
         z: 0
       }
-    ];
+    ]
 
-    this.animation = new TimelineMax();
+    this.animation = new TimelineMax()
     this.animation
       .to(this.die.current, 0.5, {
         rotationX: 1080,
@@ -194,21 +194,21 @@ export default class DieRolled extends Component {
           rotationZ: positions[this.props.num - 1].z
         },
         `+=${this.props.delay * 0.98}`
-      );
-  };
+      )
+  }
 
   componentDidUpdate(prevProps) {
-    this.rollDie();
+    this.rollDie()
   }
   componentDidMount() {
-    this.rollDie();
+    this.rollDie()
   }
 
   makeRandom = (min, max) => {
-    const random = Math.floor(Math.random() * (max - min + 1) + min);
-    console.log(random);
-    return random;
-  };
+    const random = Math.floor(Math.random() * (max - min + 1) + min)
+    console.log(random)
+    return random
+  }
 
   render() {
     return (
@@ -256,6 +256,6 @@ export default class DieRolled extends Component {
         <div className="side cover y" />
         <div className="side cover z" />
       </Scene>
-    );
+    )
   }
 }

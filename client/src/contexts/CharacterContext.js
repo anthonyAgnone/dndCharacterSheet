@@ -1,14 +1,9 @@
-<<<<<<< HEAD
 import React, { createContext, Component } from 'react'
 const { Provider, Consumer } = createContext()
-=======
-import React, { createContext, Component } from 'react';
-const { Provider, Consumer } = createContext();
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a
 
 export default class CharacterContext extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       name: '',
       race: '',
@@ -72,39 +67,33 @@ export default class CharacterContext extends Component {
       allies: {},
       characterBackstory: '',
       treasure: []
-<<<<<<< HEAD
     }
-=======
-    };
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a
   }
 
   changeStat = (name, statChange) => {
     this.setState(prevState => ({
       [name]: (prevState[name] += statChange)
-    }));
-  };
+    }))
+  }
 
   getStats = () => {
-    const statKeysArr = Object.keys(this.state);
-    const statValArr = [];
-    Object.values(this.state).map(stat => statValArr.push(stat + '\n'));
-    return { statKeysArr, statValArr };
-  };
+    const statKeysArr = Object.keys(this.state)
+    const statValArr = []
+    Object.values(this.state).map(stat => statValArr.push(stat + '\n'))
+    return { statKeysArr, statValArr }
+  }
 
   setValue = (name, value) => {
     this.setState({
       [name]: value
-    });
-  };
+    })
+  }
 
   statsDone = () => {
     console.log(
-      `Stats complete for ${this.state.name} the level ${this.state.level} ${
-        this.state.race
-      } ${this.state.cClass}`
-    );
-  };
+      `Stats complete for ${this.state.name} the level ${this.state.level} ${this.state.race} ${this.state.cClass}`
+    )
+  }
 
   setValue = (name, value) => {
     this.setState({
@@ -125,16 +114,9 @@ export default class CharacterContext extends Component {
       setValue: this.setValue,
       statsDone: this.statsDone,
       ...this.state
-<<<<<<< HEAD
     }
     return <Provider value={props}>{this.props.children}</Provider>
-=======
-    };
-    return <Provider value={props}>{this.props.children}</Provider>;
->>>>>>> 506526267d15f53dd849c2754ec6fc23236b332a
   }
 }
 
-export const withCharacter = C => props => (
-  <Consumer>{value => <C {...value} {...props} />}</Consumer>
-);
+export const withCharacter = C => props => <Consumer>{value => <C {...value} {...props} />}</Consumer>

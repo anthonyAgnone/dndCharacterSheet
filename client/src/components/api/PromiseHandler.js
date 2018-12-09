@@ -1,14 +1,15 @@
-import React, { Component } from 'react';
+/* eslint-disable */
+import React, { Component } from 'react'
 
 export default class PromiseHandler extends Component {
   constructor() {
-    super();
+    super()
     this.state = {
       data: null,
       err: null,
       loading: true,
       handleSelected: null
-    };
+    }
   }
 
   componentDidMount() {
@@ -19,9 +20,9 @@ export default class PromiseHandler extends Component {
         data,
         handleSelected: this.props.handleSelected
       })
-    );
+    )
   }
   render() {
-    return this.props.render(this.state);
+    return this.props.render(this.state)
   }
 }
