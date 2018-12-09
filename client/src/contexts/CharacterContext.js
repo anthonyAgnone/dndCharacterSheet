@@ -1,5 +1,4 @@
 import React, { createContext, Component } from 'react'
-
 const { Provider, Consumer } = createContext()
 
 export default class CharacterContext extends Component {
@@ -8,17 +7,17 @@ export default class CharacterContext extends Component {
     this.state = {
       name: '',
       race: '',
-      class: '',
+      cClass: '',
       level: 1,
       background: '',
       alignment: '',
       experience: 0,
-      str: 23,
+      str: 0,
       dex: 0,
-      const: 4,
+      con: 0,
       int: 0,
       wis: 0,
-      charisma: 0,
+      cha: 0,
       inspiration: false,
       proficiency: 0,
       perception: 0,
@@ -69,30 +68,41 @@ export default class CharacterContext extends Component {
       characterBackstory: '',
       treasure: []
     }
-    this.changeStat = this.changeStat.bind(this)
-    this.getStats = this.getStats.bind(this)
   }
 
-  changeStat(name, statChange) {
+  changeStat = (name, statChange) => {
     this.setState(prevState => ({
       [name]: (prevState[name] += statChange)
     }))
   }
 
-  getStats() {
+  getStats = () => {
     const statKeysArr = Object.keys(this.state)
     const statValArr = []
     Object.values(this.state).map(stat => statValArr.push(stat + '\n'))
     return { statKeysArr, statValArr }
   }
 
+  setValue = (name, value) => {
+    this.setState({
+      [name]: value
+    })
+  }
+
+  statsDone = () => {
+    console.log(
+      `Stats complete for ${this.state.name} the level ${this.state.level} ${this.state.race} ${this.state.cClass}`
+    )
+  }
+
   render() {
     const props = {
       changeStat: this.changeStat,
       getStats: this.getStats,
+      setValue: this.setValue,
+      statsDone: this.statsDone,
       ...this.state
     }
-
     return <Provider value={props}>{this.props.children}</Provider>
   }
 }
