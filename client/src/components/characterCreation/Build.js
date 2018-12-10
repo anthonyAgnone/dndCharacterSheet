@@ -1,28 +1,28 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
+import React, { Component } from 'react';
+import styled from 'styled-components';
 
-import axios from 'axios'
-import PromiseHandler from '../api/PromiseHandler'
-import { withinView } from '../api/View'
+import axios from 'axios';
+import PromiseHandler from '../api/PromiseHandler';
+import { withinView } from '../api/View';
 
-import RaceList from '../lists/RaceList'
-import GenderList from '../lists/GenderList'
-import ClassList from '../lists/ClassList'
+import RaceList from '../lists/RaceList';
+import GenderList from '../lists/GenderList';
+import ClassList from '../lists/ClassList';
 
-import StatRoll from '../statCalculations/StatRoll'
-import AssignStats from '../statCalculations/AssignStats'
+import StatRoll from '../statCalculations/StatRoll';
+import AssignStats from '../statCalculations/AssignStats';
 
-import TextField from '@material-ui/core/TextField'
-import Stepper from '@material-ui/core/Stepper'
-import Step from '@material-ui/core/Step'
-import StepLabel from '@material-ui/core/StepLabel'
-import StepContent from '@material-ui/core/StepContent'
-import Typography from '@material-ui/core/Typography'
-import Button from '@material-ui/core/Button'
-import Paper from '@material-ui/core/Paper'
-import { withCharacter } from '../../contexts/CharacterContext'
+import TextField from '@material-ui/core/TextField';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import StepContent from '@material-ui/core/StepContent';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+import Paper from '@material-ui/core/Paper';
+import { withCharacter } from '../../contexts/CharacterContext';
 
-const cors = 'https://vschool-cors.herokuapp.com/?url='
+const cors = 'https://vschool-cors.herokuapp.com/?url=';
 
 function getSteps() {
   return [
@@ -33,7 +33,7 @@ function getSteps() {
     'Roll 6 times for ability scores',
     'Assign your rolls to stats',
     'Review your character'
-  ]
+  ];
 }
 
 const Form = styled.form`
@@ -49,7 +49,7 @@ const Form = styled.form`
   & #outlined-name {
     width: 40vw;
   }
-`
+`;
 
 const FormatDiv = styled.div`
   width: 50%;
@@ -57,79 +57,90 @@ const FormatDiv = styled.div`
   display: flex;
   justify-content: space-around;
   padding-top: 1em;
-`
+`;
 
 class Build extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     // to change initial section in character select for testing, change activeStep to appropriate step #, starts at 0
     this.state = {
       activeStep: 0,
       statRolls: [0, 0, 0, 0, 0, 0]
-    }
+    };
   }
 
   handleChange = name => event => {
-    this.props.setValue(name, event.target.value)
-  }
+    //this.props.setValue(name, event.target.value);
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      this.handleNext();
+    } else {
+      this.props.setValue(name, this.props.name + event.key);
+    }
+  };
 
   handleNext = () => {
     if (this.state.activeStep === 6) {
-      this.props.statsDone()
+      this.props.statsDone();
     }
     this.setState(state => ({
       activeStep: state.activeStep + 1
-    }))
-  }
+    }));
+  };
 
   handleBack = () => {
     this.setState(state => ({
       activeStep: state.activeStep - 1
-    }))
-  }
+    }));
+  };
 
   handleReset = () => {
     this.setState({
       activeStep: 0
-    })
-  }
+    });
+  };
 
   getRaceData = () => {
-    const url = 'http://dnd5eapi.co/api/races'
+    const url = 'http://dnd5eapi.co/api/races';
 
-    const apiQuery = `${cors}${url}`
+    const apiQuery = `${cors}${url}`;
 
-    return axios.get(apiQuery).then(response => response.data.results)
-  }
+    return axios.get(apiQuery).then(response => response.data.results);
+  };
 
   getClassData() {
-    const url = 'http://dnd5eapi.co/api/classes'
+    const url = 'http://dnd5eapi.co/api/classes';
 
-    const apiQuery = `${cors}${url}`
+    const apiQuery = `${cors}${url}`;
 
-    return axios.get(apiQuery).then(response => response.data.results)
+    return axios.get(apiQuery).then(response => response.data.results);
   }
 
   handleSelected = (category, value) => {
-    this.setState({
-      [category]: value
-    })
-    console.log(category)
-  }
+    // this.setState({
+    //   [category]: value
+    // });
+    this.props.setValue(category, value);
+    //console.log(category);
+  };
 
   handleRoll = array => {
     this.setState({
       statRolls: array
-    })
-  }
+    });
+  };
 
   render() {
-    const steps = getSteps()
-    const { activeStep } = this.state
+    const steps = getSteps();
+    const { activeStep } = this.state;
     return (
       <Form>
-        <Stepper className="stepper" activeStep={activeStep} orientation="vertical">
+        <Stepper
+          className="stepper"
+          activeStep={activeStep}
+          orientation="vertical"
+        >
           <Step className="step">
             <StepLabel>{steps[0]}</StepLabel>
             <StepContent className="stepContent">
@@ -137,7 +148,7 @@ class Build extends Component {
                 id="outlined-name"
                 label="Name"
                 value={this.props.name}
-                onChange={this.handleChange('name')}
+                onKeyPress={this.handleChange('name')}
                 margin="normal"
                 variant="outlined"
               />
@@ -145,7 +156,11 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </FormatDiv>
@@ -163,7 +178,11 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -177,7 +196,11 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -195,7 +218,11 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -209,7 +236,11 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -220,7 +251,7 @@ class Build extends Component {
             <StepContent>
               <AssignStats
                 handleRoll={this.handleRoll}
-                statRolls={this.props.statRolls}
+                statRolls={this.state.statRolls}
                 str={this.props.str}
                 dex={this.props.dex}
                 con={this.props.con}
@@ -233,7 +264,11 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -246,7 +281,11 @@ class Build extends Component {
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
                 </Button>
-                <Button variant="contained" color="primary" onClick={this.handleNext}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
                   {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
                 </Button>
               </div>
@@ -260,8 +299,8 @@ class Build extends Component {
           </Paper>
         )}
       </Form>
-    )
+    );
   }
 }
 
-export default withCharacter(Build)
+export default withCharacter(Build);
