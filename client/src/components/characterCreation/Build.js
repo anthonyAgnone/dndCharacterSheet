@@ -8,6 +8,7 @@ import { withinView } from '../api/View';
 import RaceList from '../lists/RaceList';
 import GenderList from '../lists/GenderList';
 import ClassList from '../lists/ClassList';
+import AlignmentList from '../lists/AlignmentList';
 import SubRaceChoice from '../lists/SubRaceChoice';
 import StatRoll from '../statCalculations/StatRoll';
 import AssignStats from '../statCalculations/AssignStats';
@@ -32,6 +33,7 @@ function getSteps() {
     'Choose your class',
     'Roll 6 times for ability scores',
     'Assign your rolls to stats',
+    'Choose your alignment',
     'Review your character'
   ];
 }
@@ -65,7 +67,7 @@ class Build extends Component {
 
     // to change initial section in character select for testing, change activeStep to appropriate step #, starts at 0
     this.state = {
-      activeStep: 0,
+      activeStep: 6,
       statRolls: [0, 0, 0, 0, 0, 0]
     };
   }
@@ -81,7 +83,7 @@ class Build extends Component {
   };
 
   handleNext = () => {
-    if (this.state.activeStep === 6) {
+    if (this.state.activeStep === getSteps().length - 1) {
       this.props.statsDone();
     }
     this.setState(state => ({
@@ -282,6 +284,26 @@ class Build extends Component {
           </Step>
           <Step>
             <StepLabel>{steps[6]}</StepLabel>
+            <StepContent>
+              <FormatDiv>
+                <AlignmentList handleSelected={this.handleSelected} />
+              </FormatDiv>
+              <div>
+                <Button disabled={activeStep === 0} onClick={this.handleBack}>
+                  Back
+                </Button>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={this.handleNext}
+                >
+                  {activeStep === steps.length - 1 ? 'Finish' : 'Next'}
+                </Button>
+              </div>
+            </StepContent>
+          </Step>
+          <Step>
+            <StepLabel>{steps[7]}</StepLabel>
             <StepContent>
               <div>
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>

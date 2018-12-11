@@ -108,7 +108,8 @@ class Display extends Component {
           <br />
           STR:{this.props.str} INT:{this.props.int} <br />
           DEX:{this.props.dex} WIS:{this.props.wis} <br />
-          CON:{this.props.con} CHA:{this.props.cha}
+          CON:{this.props.con} CHA:{this.props.cha} <br />
+          Alignment:{this.props.alignment}
         </div>
         <div className="spells">I am spells</div>
         <div className="image">
