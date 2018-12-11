@@ -185,16 +185,11 @@ export default class DieRolled extends Component {
         rotationY: 1080,
         rotationZ: 1080
       })
-      .to(
-        this.die.current,
-        2,
-        {
-          rotationX: positions[this.props.num - 1].x,
-          rotationY: positions[this.props.num - 1].y,
-          rotationZ: positions[this.props.num - 1].z
-        },
-        `+=${this.props.delay * 0.98}`
-      )
+      .to(this.die.current, 2 * Math.random(), {
+        rotationX: positions[this.props.num - 1].x,
+        rotationY: positions[this.props.num - 1].y,
+        rotationZ: positions[this.props.num - 1].z
+      })
   }
 
   componentDidUpdate(prevProps) {
