@@ -1,12 +1,13 @@
-import React, { createContext, Component } from 'react'
-const { Provider, Consumer } = createContext()
+import React, { createContext, Component } from 'react';
+const { Provider, Consumer } = createContext();
 
 export default class CharacterContext extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
       name: '',
       race: '',
+      subRace: '',
       cClass: '',
       level: 1,
       background: '',
@@ -67,45 +68,49 @@ export default class CharacterContext extends Component {
       allies: {},
       characterBackstory: '',
       treasure: []
-    }
+    };
   }
 
   changeStat = (name, statChange) => {
     this.setState(prevState => ({
       [name]: (prevState[name] += statChange)
-    }))
-  }
+    }));
+  };
 
   getStats = () => {
-    const statKeysArr = Object.keys(this.state)
-    const statValArr = []
-    Object.values(this.state).map(stat => statValArr.push(stat + '\n'))
-    return { statKeysArr, statValArr }
-  }
+    const statKeysArr = Object.keys(this.state);
+    const statValArr = [];
+    Object.values(this.state).map(stat => statValArr.push(stat + '\n'));
+    return { statKeysArr, statValArr };
+  };
 
   setValue = (name, value) => {
     this.setState({
       [name]: value
-    })
-  }
+    });
+  };
 
   statsDone = () => {
     console.log(
-      `Stats complete for ${this.state.name} the level ${this.state.level} ${this.state.race} ${this.state.cClass}`
-    )
-  }
+      `Stats complete for ${this.state.name} the level ${this.state.level} ${
+        this.state.race
+      } ${this.state.cClass}`
+    );
+  };
 
   setValue = (name, value) => {
     this.setState({
       [name]: value
-    })
-  }
+    });
+  };
 
   statsDone = () => {
     console.log(
-      `Stats complete for ${this.state.name} the level ${this.state.level} ${this.state.race} ${this.state.cClass}`
-    )
-  }
+      `Stats complete for ${this.state.name} the level ${this.state.level} ${
+        this.state.race
+      } ${this.state.cClass}`
+    );
+  };
 
   render() {
     const props = {
@@ -114,9 +119,11 @@ export default class CharacterContext extends Component {
       setValue: this.setValue,
       statsDone: this.statsDone,
       ...this.state
-    }
-    return <Provider value={props}>{this.props.children}</Provider>
+    };
+    return <Provider value={props}>{this.props.children}</Provider>;
   }
 }
 
-export const withCharacter = C => props => <Consumer>{value => <C {...value} {...props} />}</Consumer>
+export const withCharacter = C => props => (
+  <Consumer>{value => <C {...value} {...props} />}</Consumer>
+);

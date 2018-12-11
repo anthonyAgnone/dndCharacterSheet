@@ -8,7 +8,7 @@ import { withinView } from '../api/View';
 import RaceList from '../lists/RaceList';
 import GenderList from '../lists/GenderList';
 import ClassList from '../lists/ClassList';
-
+import SubRaceChoice from '../lists/SubRaceChoice';
 import StatRoll from '../statCalculations/StatRoll';
 import AssignStats from '../statCalculations/AssignStats';
 
@@ -174,6 +174,10 @@ class Build extends Component {
                 render={withinView(RaceList)}
                 handleSelected={this.handleSelected}
               />
+              <SubRaceChoice
+                race={this.props.race}
+                handleSelected={this.handleSelected}
+              />
               <div>
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
                   Back
@@ -259,6 +263,8 @@ class Build extends Component {
                 wis={this.props.wis}
                 cha={this.props.cha}
                 handleSelected={this.handleSelected}
+                race={this.props.race}
+                subRace={this.props.subRace}
               />
               <div>
                 <Button disabled={activeStep === 0} onClick={this.handleBack}>
