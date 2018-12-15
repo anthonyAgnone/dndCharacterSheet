@@ -1,21 +1,21 @@
-import React, { Component } from 'react';
-import { withUserContext } from '../../contexts/UserContext';
-import LoggedIn from './LoggedIn';
-import LoggedOut from './LoggedOut';
-import classNames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
-import Drawer from '@material-ui/core/Drawer';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import React, { Component } from 'react'
+import { withUserContext } from '../../contexts/UserContext'
+import LoggedIn from './LoggedIn'
+import LoggedOut from './LoggedOut'
+import classNames from 'classnames'
+import { withStyles } from '@material-ui/core/styles'
+import Drawer from '@material-ui/core/Drawer'
+import CssBaseline from '@material-ui/core/CssBaseline'
+import AppBar from '@material-ui/core/AppBar'
+import Toolbar from '@material-ui/core/Toolbar'
+import Typography from '@material-ui/core/Typography'
+import Divider from '@material-ui/core/Divider'
+import IconButton from '@material-ui/core/IconButton'
+import MenuIcon from '@material-ui/icons/Menu'
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
+import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
-const drawerWidth = 540;
+const drawerWidth = 540
 
 const styles = theme => ({
   root: {
@@ -72,27 +72,27 @@ const styles = theme => ({
     }),
     marginLeft: 0
   }
-});
+})
 
 class Menu extends Component {
   state = {
     open: false
-  };
+  }
 
   handleDrawerOpen = () => {
-    this.setState({ open: true });
-  };
+    this.setState({ open: true })
+  }
 
   handleDrawerClose = () => {
-    this.setState({ open: false });
-  };
+    this.setState({ open: false })
+  }
 
   render() {
-    const { classes, theme } = this.props;
-    const { open } = this.state;
+    const { classes, theme } = this.props
+    const { open } = this.state
 
     return (
-      <div className={classes.root}>
+      <div style={{ display: this.props.token ? 'none' : 'block' }} className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
@@ -125,18 +125,14 @@ class Menu extends Component {
         >
           <div className={classes.drawerHeader}>
             <IconButton onClick={this.handleDrawerClose}>
-              {theme.direction === 'ltr' ? (
-                <ChevronLeftIcon />
-              ) : (
-                <ChevronRightIcon />
-              )}
+              {theme.direction === 'ltr' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
             </IconButton>
           </div>
           <Divider />
           {this.props.token ? <LoggedIn /> : <LoggedOut />}
         </Drawer>
       </div>
-    );
+    )
   }
 }
-export default withUserContext(withStyles(styles, { withTheme: true })(Menu));
+export default withUserContext(withStyles(styles, { withTheme: true })(Menu))

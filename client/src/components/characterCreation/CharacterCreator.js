@@ -2,12 +2,12 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Build from './Build'
+import CustomStepper from './CustomStepper'
 import Display from './Display'
 
 const Wrapper = styled.main`
   width: 100vw;
-  height: 90vh;
-  margin: 10vh 0 0 0;
+  height: 100vh;
   display: flex;
   justify-content: space-around;
 `
@@ -15,7 +15,8 @@ const Wrapper = styled.main`
 export default function CharacterCreator() {
   return (
     <Wrapper>
-      <Build />
+      {/* THIS SHOULD BE A SWITCH THAT SWITCHES BETWEEN STEPPERS */}
+      <CustomStepper />
       <Display />
     </Wrapper>
   )
