@@ -97,10 +97,10 @@ class Display extends Component {
           </div>
           <div className="row">
             <p>STR: {this.props.str}</p>
-            <p>INT: {this.props.int}</p>
             <p>DEX: {this.props.dex}</p>
-            <p>WIS: {this.props.wis}</p>
             <p>CON: {this.props.con}</p>
+            <p>INT: {this.props.int}</p>
+            <p>WIS: {this.props.wis}</p>
             <p>CHA: {this.props.cha}</p>
           </div>
           <div className="row">

@@ -17,6 +17,8 @@ import AssignStats from '../statCalculations/AssignStats'
 
 import { withCharacter } from '../../contexts/CharacterContext'
 
+import MoreInfo from './MoreInfo'
+
 const cors = 'https://vschool-cors.herokuapp.com/?url='
 
 const Wrapper = styled.div`
@@ -228,6 +230,7 @@ class CustomStepper extends Component {
             />
             <SubRaceChoice race={this.props.race} handleSelected={this.handleSelected} />
           </StepContent>
+          <MoreInfo>This is a lot of text</MoreInfo>
         </Step>
         {/* CLASS STEP */}
         <Step className={this.state.step === 1 ? 'step' : 'step minimized'}>

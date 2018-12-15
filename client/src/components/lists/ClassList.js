@@ -45,6 +45,7 @@ const ClassList = ({ data, handleSelected }) => {
         src={classes[i]}
         className={cClass[cClass.name]}
         alt=""
+        key={i}
       />
     </Tooltip>
   ))
