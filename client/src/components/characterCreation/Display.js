@@ -10,11 +10,14 @@ import fighter from '../lists/assets/classes/fighter.png'
 import monk from '../lists/assets/classes/monk.png'
 import paladin from '../lists/assets/classes/paladin.png'
 
+import bg from '../lists/assets/misc/testBG.png'
+
 const Wrapper = styled.aside`
   width: 40%;
   height: 100%;
   padding: 1em 0;
   background: #b69869;
+  background-image: url(${bg});
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   grid-template-rows: repeat(3, 1fr);

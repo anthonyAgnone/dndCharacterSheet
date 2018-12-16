@@ -8,9 +8,16 @@ import SubRaces from '../api/SubRace.json'
 
 import SubRaceChoice from '../lists/SubRaceChoice'
 
+import bg from '../lists/assets/misc/testBG.png'
+
+import { darken } from 'polished'
+
 const Wrapper = styled.div`
   width: 100%;
   background-color: #d9e1be;
+  background-image: url('${bg}');
+  background-attachment: local;
+  background-position: 20% 40%;
   color: #221e1f;
   transition: all 0.3s ease;
   height: ${props => (props.visible ? '100%' : 0)};
@@ -19,6 +26,15 @@ const Wrapper = styled.div`
   z-index: 9999;
   position: relative;
   padding: ${props => (props.visible ? '2em' : 0)};
+  font-size: 1.4em;
+  font-weight: 400;
+  color: ${darken(0.5967, '#ECD7AC')};
+  text-shadow: 1px 1px 0px rgba(255,255,255, .07);
+  h1,h2 {
+    font-weight: 700;
+    color: #570002;
+    opacity: .8;
+  }
 `
 const raceArray = ['Dwarf', 'Elf', 'Halfling', 'Human', 'Dragonborn', 'Gnome', 'Half-Elf', 'Half-Orc', 'Tiefling']
 
