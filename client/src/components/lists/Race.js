@@ -1,5 +1,6 @@
 import React, { Component, createRef } from 'react'
 import styled from 'styled-components'
+import { darken } from 'polished'
 import elf from './assets/races/portraitElf.png'
 
 const Wrapper = styled.div`
@@ -15,6 +16,26 @@ const Wrapper = styled.div`
     height: 100%;
     width: 100%;
   }
+  .hover {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    top: 100px;
+    width: 100%;
+    height: 2em;
+    background-color: rgba(33, 33, 33, 0.67);
+    color: #fff;
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    text-align: center;
+    overflow: hidden;
+    height: 0;
+  }
+  .visible {
+    height: 2em;
+    z-index: 9999;
+    opacity: 1;
+  }
   &.expanded {
     height: 300px;
     width: 300px;
@@ -22,30 +43,57 @@ const Wrapper = styled.div`
   }
   &:first-child {
     background-color: #009688;
+    :hover {
+      background-color: ${darken(0.2, '#009688')};
+    }
   }
   &:nth-child(2) {
     background-color: #00e5ff;
+    :hover {
+      background-color: ${darken(0.2, '#00e5ff')};
+    }
   }
   &:nth-child(3) {
     background-color: #00897b;
+    :hover {
+      background-color: ${darken(0.2, '#00897b')};
+    }
   }
   &:nth-child(4) {
     background-color: #64dd17;
+    :hover {
+      background-color: ${darken(0.2, '#64dd17')};
+    }
   }
   &:nth-child(5) {
     background-color: #cddc39;
+    :hover {
+      background-color: ${darken(0.2, '#cddc39')};
+    }
   }
   &:nth-child(6) {
     background-color: #757575;
+    :hover {
+      background-color: ${darken(0.2, '#757575')};
+    }
   }
   &:nth-child(7) {
     background-color: #ff6d00;
+    :hover {
+      background-color: ${darken(0.2, '#ff6d00')};
+    }
   }
   &:nth-child(8) {
     background-color: #311b92;
+    :hover {
+      background-color: ${darken(0.2, '#311b92')};
+    }
   }
   &:last-child {
     background-color: #d4e157;
+    :hover {
+      background-color: ${darken(0.2, '#d4e157')};
+    }
   }
 `
 
@@ -54,7 +102,8 @@ export default class Race extends Component {
     super(props)
 
     this.state = {
-      expanded: false
+      expanded: false,
+      hoverVisible: false
     }
     this.race = createRef()
   }
@@ -62,7 +111,8 @@ export default class Race extends Component {
   handleExpand = () => {
     this.setState(
       prevState => ({
-        expanded: !prevState.expanded
+        expanded: !prevState.expanded,
+        hoverVisible: false
       }),
       () => {
         if (this.state.expanded) this.race.current.style.zIndex = 1000
@@ -73,6 +123,25 @@ export default class Race extends Component {
         }
       }
     )
+    console.log(this.race.current)
+  }
+
+  handleHoverOver = () => {
+    if (!this.state.expanded) {
+      this.setState({
+        hoverVisible: true
+      })
+    } else {
+      this.setState({
+        hoverVisible: false
+      })
+    }
+  }
+
+  handleHoverOut = () => {
+    this.setState({
+      hoverVisible: false
+    })
   }
 
   render() {
@@ -88,13 +157,21 @@ export default class Race extends Component {
         index={index}
         expanded={this.state.expanded}
         className={this.state.expanded ? 'test expanded' : 'test'}
-        onClick={() => {
-          handleSelected('race', name)
-          handleSelected('subRace', '')
-          this.handleExpand()
-        }}
+        onMouseOver={() => this.handleHoverOver()}
+        onMouseOut={() => this.handleHoverOut()}
       >
-        <img src={elf} alt="" />
+        <img
+          src={elf}
+          alt=""
+          onClick={() => {
+            handleSelected('race', name)
+            handleSelected('subRace', '')
+            this.handleExpand()
+          }}
+        />
+        <div className={this.state.hoverVisible ? 'hover visible' : 'hover'}>
+          <h3>{name}</h3>
+        </div>
       </Wrapper>
     )
   }
