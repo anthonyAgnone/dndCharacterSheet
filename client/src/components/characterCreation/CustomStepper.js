@@ -16,7 +16,7 @@ import AssignStats from '../statCalculations/AssignStats'
 
 import { withCharacter } from '../../contexts/CharacterContext'
 
-import MoreInfo from './MoreInfo'
+import bg from './darkTestBg.png'
 
 const cors = 'https://vschool-cors.herokuapp.com/?url='
 
@@ -28,6 +28,7 @@ const Wrapper = styled.div`
   position: relative;
   margin: auto;
   background-color: #221e1f;
+  background-image: url('${bg}');
   &::after {
     content: '';
     position: absolute;
@@ -42,7 +43,7 @@ const Wrapper = styled.div`
     z-index: 2;
   }
 `
-
+//header of active section should be 2em . 2.2em
 const Step = styled.div`
   padding: 0 20px 24px 50px;
   position: relative;
