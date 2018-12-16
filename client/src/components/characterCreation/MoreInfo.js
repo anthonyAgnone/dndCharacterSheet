@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import { withCharacter } from '../../contexts/CharacterContext'
+import React, { Component } from 'react';
+import { withCharacter } from '../../contexts/CharacterContext';
 
-import styled from 'styled-components'
+import styled from 'styled-components';
 
-import axios from 'axios'
+import axios from 'axios';
+import SubRaces from '../api/SubRace.json';
 
 const Wrapper = styled.div`
   width: 89%;
@@ -14,37 +15,74 @@ const Wrapper = styled.div`
   color: #221e1f;
   transform: translateX(-50%);
   transition: all 0.3s ease;
-  overflow-overflow: ${props => (props.visible ? 'scroll' : 'hidden')};
+  overflow-x: hidden;
+  overflow-y: ${props => (props.visible ? 'scroll' : 'hidden')};
+  padding: ${props => (props.visible ? '2em' : 0)};
   height: ${props => (props.visible ? '200px' : 0)};
   z-index: 9999;
-`
-const raceArray = ['Dwarf', 'Elf', 'Halfling', 'Human', 'Dragonborn', 'Gnome', 'Half-Elf', 'Half-Orc', 'Tiefling']
+`;
+const raceArray = [
+  'Dwarf',
+  'Elf',
+  'Halfling',
+  'Human',
+  'Dragonborn',
+  'Gnome',
+  'Half-Elf',
+  'Half-Orc',
+  'Tiefling'
+];
 
-const cors = 'https://vschool-cors.herokuapp.com/?url='
+const cors = 'https://vschool-cors.herokuapp.com/?url=';
 
 class MoreInfo extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       visible: false,
-      dataObject: {}
-    }
+      dataRace: {},
+      dataSubRace: {}
+    };
   }
 
   componentDidUpdate(prevProps) {
     // Typical usage (don't forget to compare props):
+
+    const searchQuery = raceArray.indexOf(this.props.race);
+
     if (this.props.race !== prevProps.race) {
       this.setState({
         race: this.props.race,
         visible: true
-      })
-      const searchQuery = raceArray.indexOf(this.props.race) + 1
-      axios.get(`${cors}http://dnd5eapi.co/api/races/${searchQuery}'`).then(response =>
+      });
+      axios
+        .get(`${cors}http://dnd5eapi.co/api/races/${searchQuery + 1}'`)
+        .then(response =>
+          this.setState({
+            dataRace: response.data
+          })
+        );
+    }
+    if (this.props.subRace !== prevProps.subRace) {
+      for (let i = 0; i < SubRaces[searchQuery].subRaces.length; i++) {
+        if (this.props.subRace === SubRaces[searchQuery].subRaces[i].subName) {
+          this.setState({
+            dataSubRace: SubRaces[searchQuery].subRaces[i]
+          });
+        }
+      }
+      if (this.props.subRace === '') {
         this.setState({
-          dataObject: response.data
-        })
-      )
+          dataSubRace: {}
+        });
+      }
+    }
+
+    if (this.props.step !== prevProps.step) {
+      this.setState({
+        visible: false
+      });
     }
   }
 
@@ -60,25 +98,58 @@ class MoreInfo extends Component {
       languages,
       traits,
       speed
-    } = this.state.dataObject
+    } = this.state.dataRace;
 
-    const statBonuses = () => {
-      if (this.state.visible) {
-        // this.state.dataObject.ability_bonuses.forEach(el => {
-        //   if (el > 0) return <p>{el}</p>
-        // })
-        console.log(ability_bonuses)
+    const statTitles = [
+      'str: +',
+      'dex: +',
+      'con: +',
+      'int: +',
+      'wis: +',
+      'cha: +'
+    ];
+    const statBonuses = array => {
+      const newArray = [];
+      if (typeof array !== 'undefined') {
+        array.forEach((el, i) => {
+          if (el > 0) {
+            newArray.push(
+              <p style={{ marginRight: '2em' }}>
+                {statTitles[i]}
+                {el}
+              </p>
+            );
+          }
+        });
       }
-    }
+      return newArray.map((el, i) => el);
+    };
     return (
       <Wrapper visible={this.state.visible}>
         <h1>{name}</h1>
         <p>{alignment}</p>
-        <p>{speed}</p>
-        <p>{statBonuses()}</p>
+        <p>Speed: {speed}</p>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex'
+          }}
+        >
+          {statBonuses(ability_bonuses)}
+        </div>
+        <h2>{this.state.dataSubRace.subName}</h2>
+        <div
+          style={{
+            width: '100%',
+            display: 'flex'
+          }}
+        >
+          {statBonuses(this.state.dataSubRace.ability_bonuses)}
+        </div>
+        <p>{this.state.dataSubRace.description}</p>
       </Wrapper>
-    )
+    );
   }
 }
 
-export default withCharacter(MoreInfo)
+export default withCharacter(MoreInfo);

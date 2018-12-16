@@ -1,25 +1,25 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import StepHeader from './StepHeader'
-import StepContent from './StepContent'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import StepHeader from './StepHeader';
+import StepContent from './StepContent';
 
-import axios from 'axios'
-import PromiseHandler from '../api/PromiseHandler'
-import { withinView } from '../api/View'
+import axios from 'axios';
+import PromiseHandler from '../api/PromiseHandler';
+import { withinView } from '../api/View';
 
-import RaceList from '../lists/RaceList'
-import GenderList from '../lists/GenderList'
-import ClassList from '../lists/ClassList'
-import AlignmentList from '../lists/AlignmentList'
-import SubRaceChoice from '../lists/SubRaceChoice'
-import StatRoll from '../statCalculations/StatRoll'
-import AssignStats from '../statCalculations/AssignStats'
+import RaceList from '../lists/RaceList';
+import GenderList from '../lists/GenderList';
+import ClassList from '../lists/ClassList';
+import AlignmentList from '../lists/AlignmentList';
+import SubRaceChoice from '../lists/SubRaceChoice';
+import StatRoll from '../statCalculations/StatRoll';
+import AssignStats from '../statCalculations/AssignStats';
 
-import { withCharacter } from '../../contexts/CharacterContext'
+import { withCharacter } from '../../contexts/CharacterContext';
 
-import MoreInfo from './MoreInfo'
+import MoreInfo from './MoreInfo';
 
-const cors = 'https://vschool-cors.herokuapp.com/?url='
+const cors = 'https://vschool-cors.herokuapp.com/?url=';
 
 const Wrapper = styled.div`
   width: 60vw;
@@ -42,7 +42,7 @@ const Wrapper = styled.div`
     transform: translateX(-45%);
     z-index: 2;
   }
-`
+`;
 
 const Step = styled.div`
   padding: 0 20px 24px 50px;
@@ -92,7 +92,7 @@ const Step = styled.div`
       padding: 0;
     }
   }
-`
+`;
 
 const ButtonContainer = styled.div`
   width: 33%;
@@ -123,16 +123,16 @@ const ButtonContainer = styled.div`
       color: #570002;
     }
   }
-`
+`;
 
 class CustomStepper extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       step: 0,
       statRolls: [0, 0, 0, 0, 0, 0]
-    }
+    };
   }
 
   /*
@@ -142,19 +142,19 @@ class CustomStepper extends Component {
    */
 
   getRaceData = () => {
-    const url = 'http://dnd5eapi.co/api/races'
+    const url = 'http://dnd5eapi.co/api/races';
 
-    const apiQuery = `${cors}${url}`
+    const apiQuery = `${cors}${url}`;
 
-    return axios.get(apiQuery).then(response => response.data.results)
-  }
+    return axios.get(apiQuery).then(response => response.data.results);
+  };
 
   getClassData() {
-    const url = 'http://dnd5eapi.co/api/classes'
+    const url = 'http://dnd5eapi.co/api/classes';
 
-    const apiQuery = `${cors}${url}`
+    const apiQuery = `${cors}${url}`;
 
-    return axios.get(apiQuery).then(response => response.data.results)
+    return axios.get(apiQuery).then(response => response.data.results);
   }
 
   /*
@@ -164,9 +164,9 @@ class CustomStepper extends Component {
    */
 
   handleActiveStep = step => {
-    if (step === this.state.step) return 'step'
-    else return 'step minimized'
-  }
+    if (step === this.state.step) return 'step';
+    else return 'step minimized';
+  };
 
   handleNextStep = () => {
     this.setState(
@@ -177,11 +177,11 @@ class CustomStepper extends Component {
         setTimeout(() => {
           this.setState(prevState => ({
             step: (prevState.step += 101)
-          }))
-        }, 400)
+          }));
+        }, 400);
       }
-    )
-  }
+    );
+  };
 
   handleLastStep = () => {
     if (this.state.step !== 0) {
@@ -193,12 +193,12 @@ class CustomStepper extends Component {
           setTimeout(() => {
             this.setState(prevState => ({
               step: (prevState.step += 99)
-            }))
-          }, 400)
+            }));
+          }, 400);
         }
-      )
+      );
     }
-  }
+  };
 
   /*
    *
@@ -207,14 +207,14 @@ class CustomStepper extends Component {
    */
 
   handleSelected = (category, value) => {
-    this.props.setValue(category, value)
-  }
+    this.props.setValue(category, value);
+  };
 
   handleRoll = array => {
     this.setState({
       statRolls: array
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -228,9 +228,12 @@ class CustomStepper extends Component {
               render={withinView(RaceList)}
               handleSelected={this.handleSelected}
             />
-            <SubRaceChoice race={this.props.race} handleSelected={this.handleSelected} />
+            <SubRaceChoice
+              race={this.props.race}
+              handleSelected={this.handleSelected}
+            />
           </StepContent>
-          <MoreInfo>This is a lot of text</MoreInfo>
+          <MoreInfo step={this.state.step} />
         </Step>
         {/* CLASS STEP */}
         <Step className={this.state.step === 1 ? 'step' : 'step minimized'}>
@@ -274,8 +277,8 @@ class CustomStepper extends Component {
           </button>
         </ButtonContainer>
       </Wrapper>
-    )
+    );
   }
 }
 
-export default withCharacter(CustomStepper)
+export default withCharacter(CustomStepper);
