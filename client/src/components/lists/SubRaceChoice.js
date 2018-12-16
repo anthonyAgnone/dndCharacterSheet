@@ -5,7 +5,7 @@ const Wrapper = styled.div`
   width: 100%;
   height: 5vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   position: absolute;
   top: 20px;
   left: 50%;
@@ -64,11 +64,6 @@ export default class SubRaceChoice extends Component {
         {subRaceArr[i]}
       </button>
     ))
-    return (
-      <Wrapper>
-        {subRaceArr.length > 0 ? <h1>Subrace </h1> : null}
-        {raceElements}
-      </Wrapper>
-    )
+    return <Wrapper>{raceElements}</Wrapper>
   }
 }
