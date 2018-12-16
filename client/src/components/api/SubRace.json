@@ -1,0 +1,123 @@
+[
+  {
+    "name": "Dwarf",
+    "subRaces": [
+      {
+        "subName": "Hill Dwarf",
+        "ability_bonuses": [0, 0, 0, 0, 1, 0],
+        "starting_traits": ["Dwarven Toughness"],
+        "starting_proficiences": [],
+        "description": "As a hill dwarf, you have keen senses, deep intuition, and remarkable resilience. The gold dwarves of Faerun in their mighty southern kingdom hill dwarves, as are the exiled Neidar and the debased Klar of Krynn in the Dragonlance setting."
+      },
+
+      {
+        "subName": "Mountain Dwarf",
+        "ability_bonuses": [2, 0, 0, 0, 0, 0],
+        "starting_traits": [],
+        "starting_proficiences": ["light armor", "medium armor"],
+        "description": "As a mountain dwarf, you're strong and hardy, accustomed to a difficult life in rugged terrain. You’re probably on the tall side (for a dwarf), and tend toward lighter coloration. The shield dwarves of northern Faerun, as well as the ruling Hylar clan and the noble Daewar clan of Dragonlance, are mountain dwarves."
+      }
+    ]
+  },
+  {
+    "name": "Elf",
+    "subRaces": [
+      {
+        "subName": "High Elf",
+        "ability_bonuses": [0, 0, 0, 1, 0, 0],
+        "starting_traits": [],
+        "starting_proficiences": [
+          "longsword",
+          "shortsword",
+          "shortbow",
+          "longbow"
+        ],
+        "description": "As a high elf, you have a keen mind and a mastery of at least the basics of magic. In many of the worlds of D&D, there are two kinds of high elves. One type (which includes the gray elves and valley elves of Greyhawk, the Silvanesti of Dragonlance, and the sun elves of the Forgotten Realms) is haughty and reclusive, believing themselves to be superior to non-elves and even other elves. The other type (including the high elves of Greyhawk. the Qualinesti of Dragonlance, and the m oon elves of the Forgotten Realms) are more com m on and more friendly, and often encountered among humans and other races. The sun elves of Faerun (also called gold elves or sunrise elves) have bronze skin and hair of copper, black, or golden blond. Their eyes are golden, silver, or black. Moon elves (also called silver elves or gray elves) are much paler, with alabaster skin som etim es tinged with blue. They often have hair of silver-white, black, or blue, but various shades of blond, brown, and red are not uncommon. Their eyes are blue or green and flecked with gold."
+      },
+
+      {
+        "subName": "Wood Elf",
+        "ability_bonuses": [0, 0, 0, 0, 1, 0],
+        "starting_traits": ["Fleet of Foot", "Mask of the Wild"],
+        "starting_proficiences": [
+          "longsword",
+          "shortsword",
+          "shortbow",
+          "longbow"
+        ],
+        "description": "As a wood elf, you have keen senses and intuition, and your fleet feet carry you quickly and stealthily through your native forests. This category includes the wild elves (grugach) of Greyhawk and the Kagonesti of Dragonlance, as well as the races called wood elves in Greyhawk and the Forgotten Realms. In Faerun, wood elves (also called wild elves, green elves, or forest elves) are reclusive and distrusting of non-elves. Wood elves’ skin tends to be copperish in hue, som etim es with traces of green. Their hair tends toward browns and blacks, but it is occasionally blond or copper-colored. Their eyes are green, brown, or hazel."
+      },
+      {
+        "subName": "Drow",
+        "ability_bonuses": [0, 0, 0, 0, 0, 1],
+        "starting_traits": [
+          "Superior Darkvision",
+          "Sunlight Sensitivity",
+          "Drow Magic"
+        ],
+        "starting_proficiences": ["rapier", "shortsword", "hand crossbow"],
+        "description": "Descended from an earlier subrace of dark-skinned elves, the drow were banished from the surface world for following the goddess Lolth down the path to evil and corruption. Now they have built their own civilization in the depths of the Underdark, patterned after the Way of Lolth. Also called dark elves, the drow have black skin that resembles polished obsidian and stark white or pale yellow hair. They com m only have very pale eyes (so pale as to be mistaken for white) in shades of lilac, silver, pink, red, and blue. They tend to be smaller and thinner than most elves. Drow adventurers are rare, and the race does not exist in all worlds. Check with your Dungeon Master to see if you can play a drow character."
+      }
+    ]
+  },
+  {
+    "name": "Halfling",
+    "subRaces": [
+      {
+        "subName": "Lightfoot",
+        "ability_bonuses": [0, 0, 0, 0, 0, 1],
+        "starting_traits": ["Naturally Stealthy"],
+        "starting_proficiences": [],
+        "description": "As a lightfoot halfling, you can easily hide from notice, even using other people as cover. You’re inclined to be affable and get along well with others. In the Forgotten Realms, lightfoot halflings have spread the farthest and thus are the most com m on variety. Lightfoots are more prone to wanderlust than other halflings, and often dwell alongside other races or take up a nomadic life. In the world of Greyhawk, these halflings are called hairfeet or tallfellows."
+      },
+
+      {
+        "subName": "Stout",
+        "ability_bonuses": [0, 0, 1, 0, 0, 0],
+        "starting_traits": ["Stout Resilience"],
+        "starting_proficiences": [],
+        "description": "As a stout halfling, you’re hardier than average and have some resistance to poison. Some say that stouts have dwarven blood. In the Forgotten Realms, these halflings are called stronghearts, and they’re most com m on in the south."
+      }
+    ]
+  },
+  {
+    "name": "Human",
+    "subRaces": []
+  },
+  {
+    "name": "Dragonborn",
+    "subRaces": []
+  },
+  {
+    "name": "Gnome",
+    "subRaces": [
+      {
+        "subName": "Rock Gnome",
+        "ability_bonuses": [0, 0, 1, 0, 0, 0],
+        "starting_traits": ["Artificer's Lore", "Tinker"],
+        "starting_proficiences": [],
+        "description": "As a rock gnome, you have a natural inventiveness and hardiness beyond that of other gnomes. Most gnomes in the worlds of D&D are rock gnomes, including the tinker gnom es of the Dragonlance setting."
+      },
+
+      {
+        "subName": "Forest Gnome",
+        "ability_bonuses": [0, 1, 0, 0, 0, 0],
+        "starting_traits": ["Natural Illusionist", "Speak with Small Beasts"],
+        "starting_proficiences": [],
+        "description": "As a forest gnome, you have a natural knack for illusion and inherent quickness and stealth. In the worlds of D&D, forest gnomes are rare and secretive. They gather in hidden communities in sylvan forests, using illusions and trickery to conceal themselves from threats or to mask their escape should they be detected. Forest gnomes tend to be friendly with other good-spirited woodland folk, and they regard elves and good fey as their most important allies. These gnomes also befriend small forest animals and rely on them for information about threats that might prowl their lands."
+      }
+    ]
+  },
+  {
+    "name": "Half-Elf",
+    "subRaces": []
+  },
+  {
+    "name": "Half-Orc",
+    "subRaces": []
+  },
+  {
+    "name": "Tiefling",
+    "subRaces": []
+  }
+]

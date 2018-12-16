@@ -1,11 +1,33 @@
 import styled from 'styled-components'
 import React, { Component } from 'react'
 
+const Button = styled.button`
+  border: 0;
+  padding: 10px 20px;
+  border-radius: 4px;
+  box-shadow: 0 5px 10px -3px rgba(0, 0, 0, 0.3);
+  color: #d9e1be;
+  transition: all 0.3s ease-in-out;
+  cursor: pointer;
+  background-color: #570002;
+  margin-right: 1em;
+  color: #d9e1be;
+  &:hover {
+    background-color: #d9e1be;
+    color: #570002;
+  }
+  &:focus {
+    outline: 0;
+  }
+`
+
 const Wrapper = styled.div`
   width: 100%;
-  height: 15vh;
+  height: 60%;
   display: flex;
   justify-content: center;
+  align-items: center;
+  padding: 2em;
 `
 export default class AssignDisplay extends Component {
   constructor(props) {
@@ -23,28 +45,30 @@ export default class AssignDisplay extends Component {
 
     for (let i = 0; i < statRolls.length; i++) {
       tmpButArr.push(
-        <button
+        <Button
           key={i}
           type="button"
           disabled={this.state.buttonsDisabled[i]}
           onClick={() => {
             this.handleStatAssign(statRolls, i)
-          }}>
+          }}
+        >
           {statRolls[i]}
-        </button>
+        </Button>
       )
     }
 
     // add a clear button at the end to reset stat allocation
     tmpButArr.push(
-      <button
+      <Button
         key={statRolls.length + 1}
         type="button"
         onClick={() => {
           this.handleClear()
-        }}>
+        }}
+      >
         Clear Stats
-      </button>
+      </Button>
     )
     return tmpButArr
   }
@@ -78,20 +102,10 @@ export default class AssignDisplay extends Component {
   // {statRolls.join(" ")}
   render() {
     return (
-      <Wrapper>
-        <div
-          style={{
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '10vh'
-          }}>
-          <div>
-            Stats Rolled : Choose Value for {this.props.statNames[this.state.statIndex].toUpperCase()}
-            <br />
-            {this.createButtons(this.props.statRolls)}
-          </div>
-        </div>
-      </Wrapper>
+      <div style={{ height: '100%', textAlign: 'center' }}>
+        <h3>Stats Rolled : Choose Value for {this.props.statNames[this.state.statIndex].toUpperCase()}</h3>
+        <Wrapper>{this.createButtons(this.props.statRolls)}</Wrapper>
+      </div>
     )
   }
 }

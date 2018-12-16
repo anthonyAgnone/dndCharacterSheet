@@ -1,16 +1,15 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import bg from './assets/races/raceSel.png';
+import React, { Component } from 'react'
+import styled from 'styled-components'
 
-import lawfulGood from './assets/alignment/lawfulGood.png';
-import neutralGood from './assets/alignment/neutralGood.png';
-import chaoticGood from './assets/alignment/chaoticGood.png';
-import lawfulNeutral from './assets/alignment/lawfulNeutral.png';
-import trueNeutral from './assets/alignment/trueNeutral.png';
-import chaoticNeutral from './assets/alignment/chaoticNeutral.png';
-import lawfulEvil from './assets/alignment/lawfulEvil.png';
-import neutralEvil from './assets/alignment/neutralEvil.png';
-import chaoticEvil from './assets/alignment/chaoticEvil.png';
+import lawfulGood from './assets/alignment/lawfulGood.png'
+import neutralGood from './assets/alignment/neutralGood.png'
+import chaoticGood from './assets/alignment/chaoticGood.png'
+import lawfulNeutral from './assets/alignment/lawfulNeutral.png'
+import trueNeutral from './assets/alignment/trueNeutral.png'
+import chaoticNeutral from './assets/alignment/chaoticNeutral.png'
+import lawfulEvil from './assets/alignment/lawfulEvil.png'
+import neutralEvil from './assets/alignment/neutralEvil.png'
+import chaoticEvil from './assets/alignment/chaoticEvil.png'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -32,7 +31,7 @@ const Wrapper = styled.div`
     transform:scale(.95, .95);
     );
   }
-`;
+`
 
 const alignmentImgs = [
   lawfulGood,
@@ -44,7 +43,7 @@ const alignmentImgs = [
   lawfulEvil,
   neutralEvil,
   chaoticEvil
-];
+]
 const alignments = [
   'Lawful Good',
   'Neutral Good',
@@ -55,13 +54,13 @@ const alignments = [
   'Lawful Evil',
   'Neutral Evil',
   'Chaotic Evil'
-];
+]
 
 //export default AlignmentList;
 export default class AlignmentList extends Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
   render() {
     // let subRaceArr = [];
@@ -69,14 +68,14 @@ export default class AlignmentList extends Component {
     const alignElements = alignments.map((data, i) => (
       <img
         onClick={() => {
-          this.props.handleSelected('alignment', alignments[i]);
+          this.props.handleSelected('alignment', alignments[i])
         }}
         //  style={style[i + 1]}
         src={alignmentImgs[i]}
         //  className={races[race.name]}
         alt=""
       />
-    ));
-    return <Wrapper>{alignElements}</Wrapper>;
+    ))
+    return <Wrapper>{alignElements}</Wrapper>
   }
 }
