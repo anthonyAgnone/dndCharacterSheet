@@ -18,6 +18,8 @@ import { withCharacter } from '../../contexts/CharacterContext'
 
 import bg from './darkTestBg.png'
 
+import { lighten } from 'polished'
+
 const cors = 'https://vschool-cors.herokuapp.com/?url='
 
 const Wrapper = styled.div`
@@ -38,7 +40,7 @@ const Wrapper = styled.div`
     box-shadow: 0px 0px 5px 0px #d9e1be;
     border-radius: 15px;
     left: calc(50px / 2);
-    bottom: 24px;
+    bottom: 26%;
     transform: translateX(-45%);
     z-index: 2;
   }
@@ -54,6 +56,7 @@ const Step = styled.div`
     height: 13px;
     width: 13px;
     background-color: #570002;
+    box-shadow: 0px 0px 5px 0px ${lighten(0.4, '#570002')};
     border-radius: 15px;
     left: calc(50px / 2);
     transform: translateX(-45%) translateY(-20px);
@@ -137,7 +140,7 @@ class CustomStepper extends Component {
 
   /*
    *
-   * HANDLE API REQUESTS
+   * AXIOS FUNCTIONS
    *
    */
 
@@ -221,7 +224,7 @@ class CustomStepper extends Component {
       <Wrapper>
         {/* RACE STEP */}
         <Step className={this.state.step === 0 ? 'step' : 'step minimized'}>
-          <StepHeader>Choose Your Race</StepHeader>
+          <StepHeader active={this.state.step === 0}>Choose Your Race</StepHeader>
           <StepContent>
             <PromiseHandler
               promise={this.getRaceData}
@@ -233,7 +236,7 @@ class CustomStepper extends Component {
         </Step>
         {/* CLASS STEP */}
         <Step className={this.state.step === 1 ? 'step' : 'step minimized'}>
-          <StepHeader>Choose Your Class</StepHeader>
+          <StepHeader active={this.state.step === 1}>Choose Your Class</StepHeader>
           <StepContent>
             <PromiseHandler
               promise={this.getClassData}
@@ -244,7 +247,7 @@ class CustomStepper extends Component {
         </Step>
         {/* ROLL FOR STATS */}
         <Step className={this.state.step === 2 ? 'step' : 'step minimized'}>
-          <StepHeader>Roll Stats</StepHeader>
+          <StepHeader active={this.state.step === 2}>Roll Stats</StepHeader>
           <StepContent>
             <StatRoll handleRoll={this.handleRoll} />
           </StepContent>
@@ -252,7 +255,7 @@ class CustomStepper extends Component {
 
         {/* ASSIGN STATS */}
         <Step className={this.state.step === 3 ? 'step' : 'step minimized'}>
-          <StepHeader>Assign Stats</StepHeader>
+          <StepHeader active={this.state.step === 3}>Assign Stats</StepHeader>
           <StepContent>
             <AssignStats
               handleRoll={this.handleRoll}
