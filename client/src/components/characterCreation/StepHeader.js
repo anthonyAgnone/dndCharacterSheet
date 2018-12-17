@@ -3,13 +3,18 @@ import styled from 'styled-components'
 
 const Wrapper = styled.div`
   user-select: none;
-  font-size: 16px;
+  font-size: ${props => (props.active ? '2em' : '1em')};
   color: #d9e1be;
+  transition: all 0.3s ease-in-out;
+  &.active {
+    font-size: 2em;
+    font-weight: 700;
+  }
 `
-const StepHeader = ({ children }) => {
+const StepHeader = ({ children, active }) => {
   return (
-    <Wrapper class="step-header">
-      <div class="header">{children}</div>
+    <Wrapper active={active} class="step-header">
+      <p>{children}</p>
     </Wrapper>
   )
 }

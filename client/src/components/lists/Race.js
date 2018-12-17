@@ -36,6 +36,24 @@ const Wrapper = styled.div`
     z-index: 9999;
     opacity: 1;
   }
+  .close {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: rgba(33, 33, 33, 0.67);
+    transition: all 0.3s ease-in-out;
+    opacity: 0;
+    text-align: center;
+    overflow: hidden;
+    height: 0;
+    color: #fff;
+  }
+  .closeVisible {
+    height: 2em;
+    z-index: 9999;
+    opacity: 1;
+  }
   &.expanded {
     height: 300px;
     width: 300px;
@@ -172,6 +190,8 @@ export default class Race extends Component {
         <div className={this.state.hoverVisible ? 'hover visible' : 'hover'}>
           <h3>{name}</h3>
         </div>
+
+        <div className={this.state.expanded ? 'close closeVisible' : 'close'}>Click to close</div>
       </Wrapper>
     )
   }
