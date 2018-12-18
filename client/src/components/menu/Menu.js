@@ -25,7 +25,9 @@ const styles = theme => ({
     transition: theme.transitions.create(['margin', 'width'], {
       easing: theme.transitions.easing.sharp,
       duration: theme.transitions.duration.leavingScreen
-    })
+    }),
+    background: '#570002',
+    color: '#d9e1be'
   },
   appBarShift: {
     width: `calc(100% - ${drawerWidth}px)`,
@@ -92,7 +94,7 @@ class Menu extends Component {
     const { open } = this.state
 
     return (
-      <div style={{ display: this.props.token ? 'none' : 'block' }} className={classes.root}>
+      <div className={classes.root}>
         <CssBaseline />
         <AppBar
           position="fixed"
