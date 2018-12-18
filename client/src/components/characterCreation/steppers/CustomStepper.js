@@ -1,28 +1,29 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import StepHeader from '../StepHeader'
-import StepContent from '../StepContent'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import StepHeader from '../StepHeader';
+import StepContent from '../StepContent';
 
-import axios from 'axios'
-import PromiseHandler from '../../api/PromiseHandler'
-import { withinView } from '../../api/View'
+import axios from 'axios';
+import PromiseHandler from '../../api/PromiseHandler';
+import { withinView } from '../../api/View';
+import { withCharacter } from '../../../contexts/CharacterContext';
 
-import RaceList from '../../lists/RaceList'
-import ClassList from '../../lists/ClassList'
+import bg from '../darkTestBg.png';
 
-import { withCharacter } from '../../../contexts/CharacterContext'
-import { withCreation } from '../../../contexts/CreationContext'
+import { lighten } from 'polished';
+import { runInThisContext } from 'vm';
 
-import { lighten } from 'polished'
-
-const cors = 'https://vschool-cors.herokuapp.com/?url='
+const cors = 'https://vschool-cors.herokuapp.com/?url=';
 
 const Wrapper = styled.div`
   width: 60vw;
   height: 100%;
+  box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.3);
   padding: 7em 0;
   position: relative;
   margin: auto;
+  background-color: #221e1f;
+  background-image: url('${bg}');
   &::after {
     content: '';
     position: absolute;
@@ -32,11 +33,12 @@ const Wrapper = styled.div`
     box-shadow: 0px 0px 5px 0px #d9e1be;
     border-radius: 15px;
     left: calc(50px / 2);
-    bottom: 34%;
+    bottom: 26%;
     transform: translateX(-45%);
     z-index: 2;
   }
-`
+`;
+//header of active section should be 2em . 2.2em
 const Step = styled.div`
   padding: 0 20px 24px 50px;
   position: relative;
@@ -86,7 +88,7 @@ const Step = styled.div`
       padding: 0;
     }
   }
-`
+`;
 
 const ButtonContainer = styled.div`
   width: 33%;
@@ -117,38 +119,15 @@ const ButtonContainer = styled.div`
       color: #570002;
     }
   }
-`
+`;
 
 class CustomStepper extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
-      step: 0,
-      statRolls: [0, 0, 0, 0, 0, 0]
-    }
-  }
-
-  /*
-   *
-   * AXIOS FUNCTIONS
-   *
-   */
-
-  getRaceData = () => {
-    const url = 'http://dnd5eapi.co/api/races'
-
-    const apiQuery = `${cors}${url}`
-
-    return axios.get(apiQuery).then(response => response.data.results)
-  }
-
-  getClassData() {
-    const url = 'http://dnd5eapi.co/api/classes'
-
-    const apiQuery = `${cors}${url}`
-
-    return axios.get(apiQuery).then(response => response.data.results)
+      step: 0
+    };
   }
 
   /*
@@ -158,9 +137,9 @@ class CustomStepper extends Component {
    */
 
   handleActiveStep = step => {
-    if (step === this.state.step) return 'step'
-    else return 'step minimized'
-  }
+    if (step === this.state.step) return 'step';
+    else return 'step minimized';
+  };
 
   handleNextStep = () => {
     this.setState(
@@ -171,11 +150,11 @@ class CustomStepper extends Component {
         setTimeout(() => {
           this.setState(prevState => ({
             step: (prevState.step += 101)
-          }))
-        }, 400)
+          }));
+        }, 400);
       }
-    )
-  }
+    );
+  };
 
   handleLastStep = () => {
     if (this.state.step !== 0) {
@@ -187,66 +166,28 @@ class CustomStepper extends Component {
           setTimeout(() => {
             this.setState(prevState => ({
               step: (prevState.step += 99)
-            }))
-          }, 400)
+            }));
+          }, 400);
         }
-      )
+      );
     }
-  }
-
-  /*
-   *
-   * CHARACTER BUILDER FUNCTIONS
-   *
-   */
-
-  handleSelected = (category, value) => {
-    this.props.setValue(category, value)
-  }
-
-  handleRoll = array => {
-    this.setState({
-      statRolls: array
-    })
-  }
-
-  handleFormChange = ({ target: { name, value } }) => {
-    this.props.setValue(name, value)
-  }
+  };
 
   render() {
+    let stepArr = [];
+    for (let i = 0; i < this.props.headerArr.length; i++) {
+      stepArr.push(
+        <Step className={this.state.step === i ? 'step' : 'step minimized'}>
+          <StepHeader active={this.state.step === i}>
+            {this.props.headerArr[i]}
+          </StepHeader>
+          {this.props.contentArr[i]}
+        </Step>
+      );
+    }
     return (
       <Wrapper>
-        {/* RACE STEP */}
-        <Step className={this.state.step === 0 ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === 0}>Choose Your Race</StepHeader>
-          <StepContent>
-            <PromiseHandler
-              promise={this.getRaceData}
-              render={withinView(RaceList)}
-              handleSelected={this.handleSelected}
-            />
-          </StepContent>
-          {/* <MoreInfo step={this.state.step} /> */}
-        </Step>
-        {/* CLASS STEP */}
-        <Step className={this.state.step === 1 ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === 1}>Choose Your Class</StepHeader>
-          <StepContent>
-            <PromiseHandler
-              promise={this.getClassData}
-              render={withinView(ClassList)}
-              handleSelected={this.handleSelected}
-            />
-          </StepContent>
-        </Step>
-        {/* NAME STEP */}
-        <Step className={this.state.step === 2 ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === 2}>Choose Your Name</StepHeader>
-          <StepContent>
-            <input type="text" name="name" value={this.props.name} onChange={this.handleFormChange} />
-          </StepContent>
-        </Step>
+        {stepArr}
         <ButtonContainer className="buttons">
           <button className="back-btn" onClick={() => this.handleLastStep()}>
             back
@@ -254,13 +195,10 @@ class CustomStepper extends Component {
           <button className="next-button" onClick={() => this.handleNextStep()}>
             Next
           </button>
-          <button className="next-button" onClick={() => this.props.handleNextPage('origin')}>
-            Stats
-          </button>
         </ButtonContainer>
       </Wrapper>
-    )
+    );
   }
 }
 
-export default withCharacter(withCreation(CustomStepper))
+export default withCharacter(CustomStepper);
