@@ -124,10 +124,28 @@ const Wrapper = styled.aside`
         text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.07);
       }
     }
+    .statsSection {
+      width: 100%;
+      margin-top: 2em;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      justify-items: center;
+      h1 {
+        font-weight: 700;
+        color: #570002;
+        opacity: 0.8;
+      }
+      p {
+        font-size: 1.4em;
+        font-weight: 400;
+        color: ${darken(0.5967, '#ECD7AC')};
+        text-shadow: 1px 1px 0px rgba(255, 255, 255, 0.07);
+      }
+    }
   }
 `
 
-const NewDisplay = ({ name, race, cClass }) => {
+const NewDisplay = ({ name, race, cClass, str, dex, int, con, wis, cha, ...props }) => {
   return (
     <Wrapper>
       <div className="tabGroup">
@@ -150,6 +168,20 @@ const NewDisplay = ({ name, race, cClass }) => {
         <div className="row">
           <h1 className="statTitle">Class: </h1>
           <p>{cClass}</p>
+        </div>
+        <div className="statsSection">
+          <h1>Str</h1>
+          <h1>Dex</h1>
+          <h1>Int</h1>
+          <h1>Const</h1>
+          <h1>Wis</h1>
+          <h1>Chr</h1>
+          <p>{str}</p>
+          <p>{dex}</p>
+          <p>{con}</p>
+          <p>{int}</p>
+          <p>{wis}</p>
+          <p>{cha}</p>
         </div>
       </div>
     </Wrapper>
