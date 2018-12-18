@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import StepHeader from './StepHeader'
-import StepContent from './StepContent'
+import StepHeader from '../StepHeader'
+import StepContent from '../StepContent'
 
 import axios from 'axios'
-import PromiseHandler from '../api/PromiseHandler'
-import { withinView } from '../api/View'
+import PromiseHandler from '../../api/PromiseHandler'
+import { withinView } from '../../api/View'
 
-import RaceList from '../lists/RaceList'
-import GenderList from '../lists/GenderList'
-import ClassList from '../lists/ClassList'
-import AlignmentList from '../lists/AlignmentList'
-import StatRoll from '../statCalculations/StatRoll'
-import AssignStats from '../statCalculations/AssignStats'
+import RaceList from '../../lists/RaceList'
+import GenderList from '../../lists/GenderList'
+import ClassList from '../../lists/ClassList'
+import AlignmentList from '../../lists/AlignmentList'
+import StatRoll from '../../statCalculations/StatRoll'
+import AssignStats from '../../statCalculations/AssignStats'
 
-import { withCharacter } from '../../contexts/CharacterContext'
+import { withCharacter } from '../../../contexts/CharacterContext'
+import { withCreation } from '../../../contexts/CreationContext'
 
-import bg from './darkTestBg.png'
+import bg from '../darkTestBg.png'
 
 import { lighten } from 'polished'
 
@@ -25,7 +26,6 @@ const cors = 'https://vschool-cors.herokuapp.com/?url='
 const Wrapper = styled.div`
   width: 60vw;
   height: 100%;
-  box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.3);
   padding: 7em 0;
   position: relative;
   margin: auto;
@@ -40,7 +40,7 @@ const Wrapper = styled.div`
     box-shadow: 0px 0px 5px 0px #d9e1be;
     border-radius: 15px;
     left: calc(50px / 2);
-    bottom: 26%;
+    bottom: 44%;
     transform: translateX(-45%);
     z-index: 2;
   }
@@ -222,40 +222,17 @@ class CustomStepper extends Component {
   render() {
     return (
       <Wrapper>
-        {/* RACE STEP */}
-        <Step className={this.state.step === 0 ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === 0}>Choose Your Race</StepHeader>
-          <StepContent>
-            <PromiseHandler
-              promise={this.getRaceData}
-              render={withinView(RaceList)}
-              handleSelected={this.handleSelected}
-            />
-          </StepContent>
-          {/* <MoreInfo step={this.state.step} /> */}
-        </Step>
-        {/* CLASS STEP */}
-        <Step className={this.state.step === 1 ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === 1}>Choose Your Class</StepHeader>
-          <StepContent>
-            <PromiseHandler
-              promise={this.getClassData}
-              render={withinView(ClassList)}
-              handleSelected={this.handleSelected}
-            />
-          </StepContent>
-        </Step>
         {/* ROLL FOR STATS */}
-        <Step className={this.state.step === 2 ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === 2}>Roll Stats</StepHeader>
+        <Step className={this.state.step === 0 ? 'step' : 'step minimized'}>
+          <StepHeader active={this.state.step === 0}>Roll Stats</StepHeader>
           <StepContent>
             <StatRoll handleRoll={this.handleRoll} />
           </StepContent>
         </Step>
 
         {/* ASSIGN STATS */}
-        <Step className={this.state.step === 3 ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === 3}>Assign Stats</StepHeader>
+        <Step className={this.state.step === 1 ? 'step' : 'step minimized'}>
+          <StepHeader active={this.state.step === 1}>Assign Stats</StepHeader>
           <StepContent>
             <AssignStats
               handleRoll={this.handleRoll}
@@ -268,11 +245,17 @@ class CustomStepper extends Component {
         </Step>
 
         <ButtonContainer className="buttons">
+          <button className="back-btn" onClick={() => this.props.handlePrevPage('stats')}>
+            Origin
+          </button>
           <button className="back-btn" onClick={() => this.handleLastStep()}>
             back
           </button>
           <button className="next-button" onClick={() => this.handleNextStep()}>
             Next
+          </button>
+          <button className="next-button" onClick={() => this.props.handleNextPage('stats')}>
+            Background
           </button>
         </ButtonContainer>
       </Wrapper>
@@ -280,4 +263,4 @@ class CustomStepper extends Component {
   }
 }
 
-export default withCharacter(CustomStepper)
+export default withCharacter(withCreation(CustomStepper))

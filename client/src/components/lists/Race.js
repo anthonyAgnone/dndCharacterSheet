@@ -2,6 +2,7 @@ import React, { Component, createRef } from 'react'
 import styled from 'styled-components'
 import { darken } from 'polished'
 import elf from './assets/races/portraitElf.png'
+import bg from './assets/misc/portraitFrame.png'
 
 const Wrapper = styled.div`
   height: 100px;
@@ -10,11 +11,17 @@ const Wrapper = styled.div`
   left: ${props => (props.expanded ? '0' : (props.index % 3) * 33.33333333)}%;
   top: ${props => (props.expanded ? '0' : Math.floor(props.index / 3) * 33.33333333)}%;
   background-color: peru;
+  ${'' /* background-image: url(${bg}); */}
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
+  padding: 3%;
   img {
     height: 100%;
     width: 100%;
+    position: relative;
   }
   .hover {
     position: absolute;
