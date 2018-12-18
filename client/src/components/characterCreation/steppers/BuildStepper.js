@@ -1,36 +1,25 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import StepHeader from '../StepHeader';
-import StepContent from '../StepContent';
+import React, { Component } from 'react'
+import CustomStepper from './CustomStepper'
 
-import CustomStepper from './CustomStepper';
+import axios from 'axios'
+import PromiseHandler from '../../api/PromiseHandler'
+import { withinView } from '../../api/View'
 
-import axios from 'axios';
-import PromiseHandler from '../../api/PromiseHandler';
-import { withinView } from '../../api/View';
+import RaceList from '../../lists/RaceList'
+import ClassList from '../../lists/ClassList'
+import AssignStats from '../../statCalculations/AssignStats'
 
-import RaceList from '../../lists/RaceList';
-import GenderList from '../../lists/GenderList';
-import ClassList from '../../lists/ClassList';
-import AlignmentList from '../../lists/AlignmentList';
-import StatRoll from '../../statCalculations/StatRoll';
-import AssignStats from '../../statCalculations/AssignStats';
+import { withCharacter } from '../../../contexts/CharacterContext'
 
-import { withCharacter } from '../../../contexts/CharacterContext';
-
-import bg from '../darkTestBg.png';
-
-import { lighten } from 'polished';
-
-const cors = 'https://vschool-cors.herokuapp.com/?url=';
+const cors = 'https://vschool-cors.herokuapp.com/?url='
 
 class BuildStepper extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       statRolls: [0, 0, 0, 0, 0, 0]
-    };
+    }
   }
 
   /*
@@ -40,19 +29,19 @@ class BuildStepper extends Component {
    */
 
   getRaceData = () => {
-    const url = 'http://dnd5eapi.co/api/races';
+    const url = 'http://dnd5eapi.co/api/races'
 
-    const apiQuery = `${cors}${url}`;
+    const apiQuery = `${cors}${url}`
 
-    return axios.get(apiQuery).then(response => response.data.results);
-  };
+    return axios.get(apiQuery).then(response => response.data.results)
+  }
 
   getClassData() {
-    const url = 'http://dnd5eapi.co/api/classes';
+    const url = 'http://dnd5eapi.co/api/classes'
 
-    const apiQuery = `${cors}${url}`;
+    const apiQuery = `${cors}${url}`
 
-    return axios.get(apiQuery).then(response => response.data.results);
+    return axios.get(apiQuery).then(response => response.data.results)
   }
 
   /*
@@ -62,60 +51,42 @@ class BuildStepper extends Component {
    */
 
   handleSelected = (category, value) => {
-    this.props.setValue(category, value);
-  };
+    this.props.setValue(category, value)
+  }
 
   handleRoll = array => {
     this.setState({
       statRolls: array
-    });
-  };
+    })
+  }
 
   render() {
     //Array of Hader Info
-    const headerArr = [
-      'Choose Your Race',
-      'Choose Your Class',
-      'Roll Stats',
-      'Assign Stats'
-    ];
+    const headerArr = ['Choose Your Race', 'Choose Your Class', 'Roll Stats', 'Assign Stats']
 
     // Array of StepContent to put in Stepper
     const contentArr = [
       // RACE LIST
-      <StepContent>
-        <PromiseHandler
-          promise={this.getRaceData}
-          render={withinView(RaceList)}
-          handleSelected={this.handleSelected}
-        />
-      </StepContent>,
+      <PromiseHandler promise={this.getRaceData} render={withinView(RaceList)} handleSelected={this.handleSelected} />,
       // CLASS LIST
-      <StepContent>
-        <PromiseHandler
-          promise={this.getClassData}
-          render={withinView(ClassList)}
-          handleSelected={this.handleSelected}
-        />
-      </StepContent>,
-      // STAT ROLL
-      <StepContent>
-        <StatRoll handleRoll={this.handleRoll} />
-      </StepContent>,
+      <PromiseHandler
+        promise={this.getClassData}
+        render={withinView(ClassList)}
+        handleSelected={this.handleSelected}
+      />,
+      // STAT ROLL,
       // ASSIGN STATS
-      <StepContent>
-        <AssignStats
-          handleRoll={this.handleRoll}
-          statRolls={this.state.statRolls}
-          handleSelected={this.handleSelected}
-          race={this.props.race}
-          subRace={this.props.subRace}
-        />
-      </StepContent>
-    ];
+      <AssignStats
+        handleRoll={this.handleRoll}
+        statRolls={this.state.statRolls}
+        handleSelected={this.handleSelected}
+        race={this.props.race}
+        subRace={this.props.subRace}
+      />
+    ]
 
-    return <CustomStepper headerArr={headerArr} contentArr={contentArr} />;
+    return <CustomStepper headerArr={headerArr} contentArr={contentArr} />
   }
 }
 
-export default withCharacter(BuildStepper);
+export default withCharacter(BuildStepper)
