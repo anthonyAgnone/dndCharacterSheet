@@ -1,14 +1,14 @@
-import React from 'react'
-import styled from 'styled-components'
-import { Switch, Route } from 'react-router-dom'
+import React from 'react';
+import styled from 'styled-components';
+import { Switch, Route } from 'react-router-dom';
 
 // import Build from './Build'
-import CustomStepper from './steppers/CustomStepper'
-import StatsStepper from './steppers/StatsStepper'
+import BuildStepper from './steppers/BuildStepper';
+import StatsStepper from './steppers/StatsStepper';
 // import Display from './Display'
-import NewDisplay from './NewDisplay'
+import NewDisplay from './NewDisplay';
 
-import bg from './darkTestBg.png'
+import bg from './darkTestBg.png';
 
 const Wrapper = styled.main`
   width: 100vw;
@@ -20,17 +20,17 @@ const Wrapper = styled.main`
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center center;
-`
+`;
 // Change names of steppers. Look to abstract stepper
 
 export default function CharacterCreator() {
   return (
     <Wrapper>
       <Switch>
-        <Route exact path="/create-character/" component={CustomStepper} />
+        <Route exact path="/create-character/" component={BuildStepper} />
         <Route path="/create-character/stats" component={StatsStepper} />
       </Switch>
       <NewDisplay />
     </Wrapper>
-  )
+  );
 }
