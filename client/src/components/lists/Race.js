@@ -10,14 +10,34 @@ const Wrapper = styled.div`
   position: absolute;
   left: ${props => (props.expanded ? '0' : (props.index % 3) * 33.33333333)}%;
   top: ${props => (props.expanded ? '0' : Math.floor(props.index / 3) * 33.33333333)}%;
-  background-color: peru;
-  ${'' /* background-image: url(${bg}); */}
-  background-position: center center;
-  background-size: cover;
-  background-repeat: no-repeat;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   padding: 3%;
+  :before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #fff;
+    height: 85%;
+    width: 85%;
+    content: '';
+    pointer-events: none;
+  }
+  :after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-image: url(${bg});
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 95%;
+    width: 95%;
+    content: '';
+    pointer-events: none;
+  }
   img {
     height: 100%;
     width: 100%;
@@ -65,60 +85,6 @@ const Wrapper = styled.div`
     height: 300px;
     width: 300px;
     transition: all 0.5s ease-in-out;
-  }
-  &:first-child {
-    background-color: #009688;
-    :hover {
-      background-color: ${darken(0.2, '#009688')};
-    }
-  }
-  &:nth-child(2) {
-    background-color: #00e5ff;
-    :hover {
-      background-color: ${darken(0.2, '#00e5ff')};
-    }
-  }
-  &:nth-child(3) {
-    background-color: #00897b;
-    :hover {
-      background-color: ${darken(0.2, '#00897b')};
-    }
-  }
-  &:nth-child(4) {
-    background-color: #64dd17;
-    :hover {
-      background-color: ${darken(0.2, '#64dd17')};
-    }
-  }
-  &:nth-child(5) {
-    background-color: #cddc39;
-    :hover {
-      background-color: ${darken(0.2, '#cddc39')};
-    }
-  }
-  &:nth-child(6) {
-    background-color: #757575;
-    :hover {
-      background-color: ${darken(0.2, '#757575')};
-    }
-  }
-  &:nth-child(7) {
-    background-color: #ff6d00;
-    :hover {
-      background-color: ${darken(0.2, '#ff6d00')};
-    }
-  }
-  &:nth-child(8) {
-    background-color: #311b92;
-    :hover {
-      background-color: ${darken(0.2, '#311b92')};
-    }
-  }
-  &:last-child {
-    background-color: #d4e157;
-    :hover {
-      background-color: ${darken(0.2, '#d4e157')};
-    }
   }
 `
 

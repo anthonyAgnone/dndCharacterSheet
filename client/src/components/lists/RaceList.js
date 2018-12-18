@@ -1,11 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-
-import MoreInfo from '../characterCreation/MoreInfo'
-
+import MoreInfo from '../characterCreation/RaceInfo'
 import Race from './Race'
-
-import bg from './assets/misc/testBG.png'
+import testbg from './assets/misc/testBG.png'
 
 const Wrapper = styled.div`
   width: 100%;
@@ -15,14 +12,14 @@ const Wrapper = styled.div`
   color: #221e1f;
   z-index: 1000;
   background-color: #d9e1be;
-  background-image: url('${bg}');
+  background-image: url(${testbg});
   background-attachment: local;
   background-position: 20% 40%;
   .left {
     width: 300px;
     height: 300px;
     overflow: hidden;
-    border-right: 2px solid black;
+    border-right: 5px solid #221e1f;
     position: relative;
   }
   .right {

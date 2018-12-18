@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import CustomStepper from './CustomStepper'
+import CustomStepper from './StepperBase'
 
 import axios from 'axios'
 import PromiseHandler from '../../api/PromiseHandler'
@@ -8,12 +8,13 @@ import { withinView } from '../../api/View'
 import RaceList from '../../lists/RaceList'
 import ClassList from '../../lists/ClassList'
 import AssignStats from '../../statCalculations/AssignStats'
+import StatRoll from '../../statCalculations/StatRoll'
 
 import { withCharacter } from '../../../contexts/CharacterContext'
 
 const cors = 'https://vschool-cors.herokuapp.com/?url='
 
-class BuildStepper extends Component {
+class OriginStats extends Component {
   constructor(props) {
     super(props)
 
@@ -75,6 +76,7 @@ class BuildStepper extends Component {
         handleSelected={this.handleSelected}
       />,
       // STAT ROLL,
+      <StatRoll handleRoll={this.handleRoll} />,
       // ASSIGN STATS
       <AssignStats
         handleRoll={this.handleRoll}
@@ -89,4 +91,4 @@ class BuildStepper extends Component {
   }
 }
 
-export default withCharacter(BuildStepper)
+export default withCharacter(OriginStats)

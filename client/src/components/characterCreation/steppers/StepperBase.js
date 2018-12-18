@@ -1,15 +1,14 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import StepHeader from '../StepHeader'
-import StepContent from '../StepContent'
+import StepHeader from './stepperComponents/StepHeader'
+import StepContent from './stepperComponents/StepContent'
 import { withCharacter } from '../../../contexts/CharacterContext'
-import bg from '../darkTestBg.png'
+import bg from '../assets/darkBg.png'
 import { lighten } from 'polished'
 
 const Wrapper = styled.div`
   width: 60vw;
   height: 100%;
-  box-shadow: 0px 10px 15px -5px rgba(0, 0, 0, 0.3);
   padding: 7em 0;
   position: relative;
   margin: auto;
@@ -101,7 +100,7 @@ const ButtonContainer = styled.div`
   }
 `
 
-class CustomStepper extends Component {
+class StepperBase extends Component {
   constructor(props) {
     super(props)
 
@@ -179,4 +178,4 @@ class CustomStepper extends Component {
   }
 }
 
-export default withCharacter(CustomStepper)
+export default withCharacter(StepperBase)
