@@ -12,6 +12,12 @@ const Button = styled.button`
   background-color: #570002;
   margin-right: 1em;
   color: #d9e1be;
+  &:disabled {
+    background-color: #60564d;
+    color: #7f7174;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
   &:hover {
     background-color: #d9e1be;
     color: #570002;
