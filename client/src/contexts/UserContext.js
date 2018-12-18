@@ -27,7 +27,7 @@ class UserContext extends Component {
   async getUser() {
     const user = await userAxios.get('/auth/verify').then(response => response.data)
     //temporary while making updates to create-character
-    this.setState({ user }, () => this.props.history.push(`/create-character`))
+    this.setState({ user }, () => this.props.history.push(`/dashboard`))
   }
 
   register = userInfo => {
