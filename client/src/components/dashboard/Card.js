@@ -17,6 +17,7 @@ const CardWrapper = styled.div`
   grid-template-rows: 15% 70% 15%;
   box-shadow: 5px 5px 10px #333;
   border-radius: 4px;
+  background-color: #570002;
   & .card-header {
     grid-row: 1;
     display: flex;
@@ -48,7 +49,7 @@ class Card extends Component {
           <h3>{this.props.name}</h3>
         </div>
         <div className="card-body">
-          <Fab onClick={() => this.props.history.push(`/create-character/id:${this.props.index}`)} color="grey[500]">
+          <Fab onClick={() => this.props.history.push(`/create-character/`)} color="grey[500]">
             <AddIcon />
           </Fab>
         </div>
