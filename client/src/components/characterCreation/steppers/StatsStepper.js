@@ -3,14 +3,6 @@ import styled from 'styled-components'
 import StepHeader from '../StepHeader'
 import StepContent from '../StepContent'
 
-import axios from 'axios'
-import PromiseHandler from '../../api/PromiseHandler'
-import { withinView } from '../../api/View'
-
-import RaceList from '../../lists/RaceList'
-import GenderList from '../../lists/GenderList'
-import ClassList from '../../lists/ClassList'
-import AlignmentList from '../../lists/AlignmentList'
 import StatRoll from '../../statCalculations/StatRoll'
 import AssignStats from '../../statCalculations/AssignStats'
 
@@ -136,28 +128,6 @@ class CustomStepper extends Component {
       step: 0,
       statRolls: [0, 0, 0, 0, 0, 0]
     }
-  }
-
-  /*
-   *
-   * AXIOS FUNCTIONS
-   *
-   */
-
-  getRaceData = () => {
-    const url = 'http://dnd5eapi.co/api/races'
-
-    const apiQuery = `${cors}${url}`
-
-    return axios.get(apiQuery).then(response => response.data.results)
-  }
-
-  getClassData() {
-    const url = 'http://dnd5eapi.co/api/classes'
-
-    const apiQuery = `${cors}${url}`
-
-    return axios.get(apiQuery).then(response => response.data.results)
   }
 
   /*
