@@ -1,12 +1,12 @@
-import React from 'react'
-import { withCharacter } from '../../contexts/CharacterContext'
-import styled from 'styled-components'
-import { darken, lighten } from 'polished'
+import React from 'react';
+import { withCharacter } from '../../contexts/CharacterContext';
+import styled from 'styled-components';
+import { darken, lighten } from 'polished';
 
-import bg from '../lists/assets/misc/testBG.png'
-import border from './border3.png'
-import testborder from './testborder2.png'
-import buttonbg from './buttonbg.png'
+import bg from '../lists/assets/misc/testBG.png';
+import border from './border3.png';
+import testborder from './testborder2.png';
+import buttonbg from './buttonbg.png';
 
 const Wrapper = styled.aside`
   width: 40%;
@@ -72,7 +72,8 @@ const Wrapper = styled.aside`
     border-left-color: #570002;
     border-right-color: #570002;
     border-top-color: ${darken(0.03, '#570002')};
-    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.45) inset, 0 5px 10px 5px rgba(0, 0, 0, 0.25);
+    box-shadow: 0 0 15px 5px rgba(0, 0, 0, 0.45) inset,
+      0 5px 10px 5px rgba(0, 0, 0, 0.25);
     width: 80%;
     height: 80vh;
     padding: 4vmin;
@@ -143,9 +144,20 @@ const Wrapper = styled.aside`
       }
     }
   }
-`
+`;
 
-const NewDisplay = ({ name, race, cClass, str, dex, int, con, wis, cha, ...props }) => {
+const NewDisplay = ({
+  name,
+  race,
+  cClass,
+  str,
+  dex,
+  con,
+  int,
+  wis,
+  cha,
+  ...props
+}) => {
   return (
     <Wrapper>
       <div className="tabGroup">
@@ -172,10 +184,10 @@ const NewDisplay = ({ name, race, cClass, str, dex, int, con, wis, cha, ...props
         <div className="statsSection">
           <h1>Str</h1>
           <h1>Dex</h1>
+          <h1>Con</h1>
           <h1>Int</h1>
-          <h1>Const</h1>
           <h1>Wis</h1>
-          <h1>Chr</h1>
+          <h1>Cha</h1>
           <p>{str}</p>
           <p>{dex}</p>
           <p>{con}</p>
@@ -185,7 +197,7 @@ const NewDisplay = ({ name, race, cClass, str, dex, int, con, wis, cha, ...props
         </div>
       </div>
     </Wrapper>
-  )
-}
+  );
+};
 
-export default withCharacter(NewDisplay)
+export default withCharacter(NewDisplay);
