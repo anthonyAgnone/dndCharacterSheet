@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import MoreInfo from '../characterCreation/RaceInfo'
+import RaceInfo from '../characterCreation/RaceInfo'
 import Race from './Race'
 import testbg from './assets/misc/testBG.png'
 
@@ -37,7 +37,7 @@ const RaceList = ({ data, handleSelected }) => {
     <Wrapper>
       <div className="left">{raceElements}</div>
       <div className="right">
-        <MoreInfo handleSelected={handleSelected} />
+        <RaceInfo handleSelected={handleSelected} />
       </div>
     </Wrapper>
   )

@@ -1,55 +1,46 @@
 import React from 'react'
-import Tooltip from '@material-ui/core/Tooltip'
 import styled from 'styled-components'
-import bg from './assets/classes/class_bg.png'
-import barbarian from './assets/classes/barbarian.png'
-import bard from './assets/classes/bard.png'
-import cleric from './assets/classes/cleric.png'
-import druid from './assets/classes/druid.png'
-import fighter from './assets/classes/fighter.png'
-import monk from './assets/classes/monk.png'
-import paladin from './assets/classes/paladin.png'
+import ClassInfo from '../characterCreation/ClassInfo'
+import Class from './Class'
+import testbg from './assets/misc/testBG.png'
 
 const Wrapper = styled.div`
   width: 100%;
   height: 300px;
-  background-image: url(${bg});
-  background-size: cover;
-  background-position: 0vh -3vh;
-  margin-bottom: 2em;
-  position: relative;
   display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  align-items: end;
-  & img {
+  grid-template-columns: 400px 1fr;
+  color: #221e1f;
+  z-index: 1000;
+  background-color: #d9e1be;
+  background-image: url(${testbg});
+  background-attachment: local;
+  background-position: 20% 40%;
+  .left {
+    width: 400px;
+    height: 300px;
+    overflow: hidden;
+    border-right: 5px solid #221e1f;
     position: relative;
-    bottom: 8px;
-    align-self: end;
-    width: 100%;
-    transition: all 0.3s easeInOut;
-    cursor: pointer;
   }
-  & img:hover {
-    background-size: cover;
-    background-image: radial-gradient(rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.001));
+  .right {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
   }
 `
 
-const classes = [barbarian, bard, cleric, druid, fighter, monk, paladin, paladin, paladin, paladin, paladin, paladin]
-
 const ClassList = ({ data, handleSelected }) => {
   const classElements = data.map((cClass, i) => (
-    <Tooltip title={cClass.name} interactive>
-      <img
-        onClick={() => handleSelected('cClass', cClass.name)}
-        src={classes[i]}
-        className={cClass[cClass.name]}
-        alt=""
-        key={i}
-      />
-    </Tooltip>
+    <Class data={cClass} key={i} index={i} handleSelected={handleSelected} />
   ))
-  return <Wrapper>{classElements}</Wrapper>
+  return (
+    <Wrapper>
+      <div className="left">{classElements}</div>
+      <div className="right">
+        <ClassInfo handleSelected={handleSelected} />
+      </div>
+    </Wrapper>
+  )
 }
 
 export default ClassList
