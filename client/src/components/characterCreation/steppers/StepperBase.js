@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
-import styled from 'styled-components'
-import StepHeader from './stepperComponents/StepHeader'
-import StepContent from './stepperComponents/StepContent'
-import { withCharacter } from '../../../contexts/CharacterContext'
-import bg from '../assets/darkBg.png'
-import { lighten } from 'polished'
+import React, { Component } from 'react';
+import styled from 'styled-components';
+import StepHeader from './stepperComponents/StepHeader';
+import StepContent from './stepperComponents/StepContent';
+import { withCharacter } from '../../../contexts/CharacterContext';
+import bg from '../assets/darkBg.png';
+import { lighten } from 'polished';
 
 const Wrapper = styled.div`
   width: 60vw;
   height: 100%;
-  padding: 7em 0;
+  padding: 4em 0;
   position: relative;
   margin: auto;
   background-color: #221e1f;
@@ -27,7 +27,7 @@ const Wrapper = styled.div`
     transform: translateX(-45%);
     z-index: 2;
   }
-`
+`;
 //header of active section should be 2em . 2.2em
 const Step = styled.div`
   padding: 0 20px 24px 50px;
@@ -67,7 +67,7 @@ const Step = styled.div`
       padding: 0;
     }
   }
-`
+`;
 
 const ButtonContainer = styled.div`
   width: 33%;
@@ -98,15 +98,15 @@ const ButtonContainer = styled.div`
       color: #570002;
     }
   }
-`
+`;
 
 class StepperBase extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       step: 0
-    }
+    };
   }
 
   /*
@@ -116,9 +116,9 @@ class StepperBase extends Component {
    */
 
   handleActiveStep = step => {
-    if (step === this.state.step) return 'step'
-    else return 'step minimized'
-  }
+    if (step === this.state.step) return 'step';
+    else return 'step minimized';
+  };
 
   handleNextStep = () => {
     this.setState(
@@ -129,11 +129,11 @@ class StepperBase extends Component {
         setTimeout(() => {
           this.setState(prevState => ({
             step: (prevState.step += 101)
-          }))
-        }, 400)
+          }));
+        }, 400);
       }
-    )
-  }
+    );
+  };
 
   handleLastStep = () => {
     if (this.state.step !== 0) {
@@ -145,22 +145,24 @@ class StepperBase extends Component {
           setTimeout(() => {
             this.setState(prevState => ({
               step: (prevState.step += 99)
-            }))
-          }, 400)
+            }));
+          }, 400);
         }
-      )
+      );
     }
-  }
+  };
 
   render() {
-    let stepArr = []
+    let stepArr = [];
     for (let i = 0; i < this.props.headerArr.length; i++) {
       stepArr.push(
         <Step className={this.state.step === i ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === i}>{this.props.headerArr[i]}</StepHeader>
+          <StepHeader active={this.state.step === i}>
+            {this.props.headerArr[i]}
+          </StepHeader>
           <StepContent>{this.props.contentArr[i]}</StepContent>
         </Step>
-      )
+      );
     }
     return (
       <Wrapper>
@@ -174,8 +176,8 @@ class StepperBase extends Component {
           </button>
         </ButtonContainer>
       </Wrapper>
-    )
+    );
   }
 }
 
-export default withCharacter(StepperBase)
+export default withCharacter(StepperBase);
