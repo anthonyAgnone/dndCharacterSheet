@@ -40,7 +40,7 @@ const raceArray = ['Dwarf', 'Elf', 'Halfling', 'Human', 'Dragonborn', 'Gnome', '
 
 const cors = 'https://vschool-cors.herokuapp.com/?url='
 
-class MoreInfo extends Component {
+class RaceInfo extends Component {
   constructor(props) {
     super(props)
 
@@ -149,4 +149,4 @@ class MoreInfo extends Component {
   }
 }
 
-export default withCharacter(MoreInfo)
+export default withCharacter(RaceInfo)

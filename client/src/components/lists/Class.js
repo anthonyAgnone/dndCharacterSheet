@@ -7,8 +7,8 @@ const Wrapper = styled.div`
   height: 100px;
   width: 100px;
   position: absolute;
-  left: ${props => (props.expanded ? '0' : (props.index % 3) * 33.33333333)}%;
-  top: ${props => (props.expanded ? '0' : Math.floor(props.index / 3) * 33.33333333)}%;
+  left: ${props => (props.expanded ? '0' : (props.index % 4) * 25)}%;
+  top: ${props => (props.expanded ? '0' : Math.floor(props.index / 4) * 33.3333)}%;
   transition: all 0.3s ease-in-out;
   cursor: pointer;
   padding: 3%;
@@ -83,11 +83,13 @@ const Wrapper = styled.div`
   &.expanded {
     height: 300px;
     width: 300px;
+    left: 50%;
+    transform: translateX(-50%);
     transition: all 0.5s ease-in-out;
   }
 `
 
-export default class Race extends Component {
+export default class Class extends Component {
   constructor(props) {
     super(props)
 
@@ -95,7 +97,7 @@ export default class Race extends Component {
       expanded: false,
       hoverVisible: false
     }
-    this.race = createRef()
+    this.class = createRef()
   }
 
   handleExpand = () => {
@@ -105,15 +107,14 @@ export default class Race extends Component {
         hoverVisible: false
       }),
       () => {
-        if (this.state.expanded) this.race.current.style.zIndex = 1000
+        if (this.state.expanded) this.class.current.style.zIndex = 1000
         else if (!this.state.expanded) {
           setTimeout(() => {
-            this.race.current.style.zIndex = 1
+            this.class.current.style.zIndex = 1
           }, 300)
         }
       }
     )
-    console.log(this.race.current)
   }
 
   handleHoverOver = () => {
@@ -142,7 +143,7 @@ export default class Race extends Component {
     } = this.props
     return (
       <Wrapper
-        ref={this.race}
+        ref={this.class}
         key={index}
         index={index}
         expanded={this.state.expanded}
@@ -154,8 +155,7 @@ export default class Race extends Component {
           src={elf}
           alt=""
           onClick={() => {
-            handleSelected('race', name)
-            handleSelected('subRace', '')
+            handleSelected('cClass', name)
             this.handleExpand()
           }}
         />
