@@ -1,51 +1,27 @@
-import React, { Component } from 'react';
-import styled from 'styled-components';
-import StepHeader from './stepperComponents/StepHeader';
-import StepContent from './stepperComponents/StepContent';
-import { withCharacter } from '../../../contexts/CharacterContext';
-import bg from '../assets/darkBg.png';
-import { lighten } from 'polished';
+import React, { Component } from 'react'
+import styled from 'styled-components'
+import StepHeader from './stepperComponents/StepHeader'
+import StepContent from './stepperComponents/StepContent'
+import { withCharacter } from '../../../contexts/CharacterContext'
+import bg from '../assets/darkBg.png'
+import { lighten } from 'polished'
 
 const Wrapper = styled.div`
   width: 60vw;
-  height: 100%;
-  padding: 4em 0;
-  position: relative;
-  margin: auto;
+  height: calc(100% - 11em);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(0,0);
   background-color: #221e1f;
   background-image: url('${bg}');
-  &::after {
-    content: '';
-    position: absolute;
-    height: 13px;
-    width: 13px;
-    background-color: #d9e1be;
-    box-shadow: 0px 0px 5px 0px #d9e1be;
-    border-radius: 15px;
-    left: calc(50px / 2);
-    bottom: 26%;
-    transform: translateX(-45%);
-    z-index: 2;
-  }
-`;
+`
 //header of active section should be 2em . 2.2em
 const Step = styled.div`
   padding: 0 20px 24px 50px;
   position: relative;
   transition: all 0.4s ease-in-out;
-  &::before {
-    content: '';
-    position: absolute;
-    height: 13px;
-    width: 13px;
-    background-color: #570002;
-    box-shadow: 0px 0px 5px 0px ${lighten(0.4, '#570002')};
-    border-radius: 15px;
-    left: calc(50px / 2);
-    transform: translateX(-45%) translateY(-20px);
-    z-index: 2;
-  }
-  &::after {
+  ${'' /* &::after {
     content: '';
     position: absolute;
     height: 100%;
@@ -55,7 +31,7 @@ const Step = styled.div`
     transform: translateY(-20px);
     top: 0;
     z-index: 1;
-  }
+  } */}
   &.minimized {
     transition: background-color 0.3s ease-in-out;
     cursor: pointer;
@@ -67,7 +43,7 @@ const Step = styled.div`
       padding: 0;
     }
   }
-`;
+`
 
 const ButtonContainer = styled.div`
   width: 33%;
@@ -98,15 +74,15 @@ const ButtonContainer = styled.div`
       color: #570002;
     }
   }
-`;
+`
 
 class StepperBase extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       step: 0
-    };
+    }
   }
 
   /*
@@ -116,9 +92,9 @@ class StepperBase extends Component {
    */
 
   handleActiveStep = step => {
-    if (step === this.state.step) return 'step';
-    else return 'step minimized';
-  };
+    if (step === this.state.step) return 'step'
+    else return 'step minimized'
+  }
 
   handleNextStep = () => {
     this.setState(
@@ -129,11 +105,11 @@ class StepperBase extends Component {
         setTimeout(() => {
           this.setState(prevState => ({
             step: (prevState.step += 101)
-          }));
-        }, 400);
+          }))
+        }, 400)
       }
-    );
-  };
+    )
+  }
 
   handleLastStep = () => {
     if (this.state.step !== 0) {
@@ -145,24 +121,22 @@ class StepperBase extends Component {
           setTimeout(() => {
             this.setState(prevState => ({
               step: (prevState.step += 99)
-            }));
-          }, 400);
+            }))
+          }, 400)
         }
-      );
+      )
     }
-  };
+  }
 
   render() {
-    let stepArr = [];
+    let stepArr = []
     for (let i = 0; i < this.props.headerArr.length; i++) {
       stepArr.push(
         <Step className={this.state.step === i ? 'step' : 'step minimized'}>
-          <StepHeader active={this.state.step === i}>
-            {this.props.headerArr[i]}
-          </StepHeader>
+          <StepHeader active={this.state.step === i}>{this.props.headerArr[i]}</StepHeader>
           <StepContent>{this.props.contentArr[i]}</StepContent>
         </Step>
-      );
+      )
     }
     return (
       <Wrapper>
@@ -176,8 +150,8 @@ class StepperBase extends Component {
           </button>
         </ButtonContainer>
       </Wrapper>
-    );
+    )
   }
 }
 
-export default withCharacter(StepperBase);
+export default withCharacter(StepperBase)

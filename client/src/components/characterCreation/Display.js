@@ -15,7 +15,9 @@ const Wrapper = styled.aside`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  position: relative;
+  position: absolute;
+  right: 0;
+  top: 0;
   :after {
     content: '';
     height: calc(83% + 1px);
