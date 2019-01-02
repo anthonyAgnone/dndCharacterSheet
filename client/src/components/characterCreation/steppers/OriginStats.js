@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import CustomStepper from './StepperBase'
-
+import TabPanel from '../TabPanel'
 import axios from 'axios'
 import PromiseHandler from '../../api/PromiseHandler'
 import { withinView } from '../../api/View'
@@ -87,7 +87,8 @@ class OriginStats extends Component {
       />
     ]
 
-    return <CustomStepper headerArr={headerArr} contentArr={contentArr} />
+    return <CustomStepper className="origin" headerArr={headerArr} contentArr={contentArr} />
+    //return <TabPanel />;
   }
 }
 

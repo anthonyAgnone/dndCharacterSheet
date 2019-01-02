@@ -17,7 +17,7 @@
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "react-swipeable-views": "^0.13.0",
-    "react-transition-group": "^2.5.0",
+    "react-transition-group": "^2.5.1",
     "styled-components": "^4.1.2"
   },
   "proxy": "http://localhost:5000",

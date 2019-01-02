@@ -8,44 +8,20 @@ import { lighten } from 'polished'
 
 const Wrapper = styled.div`
   width: 60vw;
-  height: 100%;
-  padding: 7em 0;
-  position: relative;
-  margin: auto;
+  height: calc(100% - 11em);
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  transform: translate(0,0);
   background-color: #221e1f;
   background-image: url('${bg}');
-  &::after {
-    content: '';
-    position: absolute;
-    height: 13px;
-    width: 13px;
-    background-color: #d9e1be;
-    box-shadow: 0px 0px 5px 0px #d9e1be;
-    border-radius: 15px;
-    left: calc(50px / 2);
-    bottom: 26%;
-    transform: translateX(-45%);
-    z-index: 2;
-  }
 `
 //header of active section should be 2em . 2.2em
 const Step = styled.div`
   padding: 0 20px 24px 50px;
   position: relative;
   transition: all 0.4s ease-in-out;
-  &::before {
-    content: '';
-    position: absolute;
-    height: 13px;
-    width: 13px;
-    background-color: #570002;
-    box-shadow: 0px 0px 5px 0px ${lighten(0.4, '#570002')};
-    border-radius: 15px;
-    left: calc(50px / 2);
-    transform: translateX(-45%) translateY(-20px);
-    z-index: 2;
-  }
-  &::after {
+  ${'' /* &::after {
     content: '';
     position: absolute;
     height: 100%;
@@ -55,7 +31,7 @@ const Step = styled.div`
     transform: translateY(-20px);
     top: 0;
     z-index: 1;
-  }
+  } */}
   &.minimized {
     transition: background-color 0.3s ease-in-out;
     cursor: pointer;

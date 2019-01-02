@@ -15,6 +15,8 @@ import MenuIcon from '@material-ui/icons/Menu'
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft'
 import ChevronRightIcon from '@material-ui/icons/ChevronRight'
 
+import { Link } from 'react-router-dom'
+
 const drawerWidth = 540
 
 const styles = theme => ({
@@ -132,6 +134,8 @@ class Menu extends Component {
           </div>
           <Divider />
           {this.props.token ? <LoggedIn /> : <LoggedOut />}
+          <Divider />
+          <Link to="/test">test</Link>
         </Drawer>
       </div>
     )
